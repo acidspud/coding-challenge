@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    environment:
+      POSTGRES_DB: kota_shop
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /data/postgres
+    volumes:
+       - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+  redis:
+    container_name: redis_container
+    image: redis
+    ports:
+      - '6379:6379'
+    restart: unless-stopped
+    volumes: 
+      - redis:/data
+volumes:
+  postgres:
+  redis:
