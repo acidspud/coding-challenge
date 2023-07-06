@@ -1,0 +1,23 @@
+.footer {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 20px;
+    align-items: center;
+    justify-content: right;
+    min-height: 70px;
+    background-color: #292f33;
+    color: white;
+    font-size: 10px;
+    text-align: center;
+    a {
+      color: white;
+      text-decoration: none;
+    }
+  }
+  @media (max-width: 900px) {
+    .footer {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 0px;
+    }
+  }

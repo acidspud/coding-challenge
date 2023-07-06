@@ -65,7 +65,7 @@ func main() {
 	})
 
 	// Serve the public folder for the frontend
-	fs := http.FileServer(http.Dir("./frontend/public"))
+	fs := http.FileServer(http.Dir("./kota-shop-app/build"))
 	e.GET("/*", echo.WrapHandler(fs))
 
 	httpDelivery.NewItemHandler(e, appMiddleware, itemUC)
