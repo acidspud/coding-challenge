@@ -1,0 +1,180 @@
+definitions:
+  request.CreateItemReq:
+    properties:
+      name:
+        type: string
+    type: object
+  request.SignInReq:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  request.SignUpReq:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  request.UpdateItemReq:
+    properties:
+      name:
+        type: string
+    type: object
+info:
+  contact: {}
+  termsOfService: http://swagger.io/terms/
+  title: GotBot Coding Challenge
+  version: 1.0.4
+paths:
+  /api/v1/auth/signin:
+    post:
+      consumes:
+      - application/json
+      description: SignIn
+      parameters:
+      - description: SignIn user
+        in: body
+        name: signin
+        required: true
+        schema:
+          $ref: '#/definitions/request.SignInReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: SignIn
+      tags:
+      - Auth
+  /api/v1/auth/signup:
+    post:
+      consumes:
+      - application/json
+      description: SignUp
+      parameters:
+      - description: SignUp user
+        in: body
+        name: signup
+        required: true
+        schema:
+          $ref: '#/definitions/request.SignUpReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: SignUp
+      tags:
+      - Auth
+  /api/v1/items:
+    get:
+      consumes:
+      - application/json
+      description: Fetch Item
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - JwtToken: []
+      summary: Fetch Item
+      tags:
+      - Items
+    post:
+      consumes:
+      - application/json
+      description: Create Item
+      parameters:
+      - description: Item to create
+        in: body
+        name: item
+        required: true
+        schema:
+          $ref: '#/definitions/request.CreateItemReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - JwtToken: []
+      summary: Create Item
+      tags:
+      - Items
+  /api/v1/items/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Item
+      parameters:
+      - description: item id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - JwtToken: []
+      summary: Delete Item
+      tags:
+      - Items
+    get:
+      consumes:
+      - application/json
+      description: Get Item
+      parameters:
+      - description: item id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - JwtToken: []
+      summary: Get Item
+      tags:
+      - Items
+    put:
+      consumes:
+      - application/json
+      description: Update Item
+      parameters:
+      - description: item id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Item to update
+        in: body
+        name: item
+        required: true
+        schema:
+          $ref: '#/definitions/request.UpdateItemReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - JwtToken: []
+      summary: Update Item
+      tags:
+      - Items
+securityDefinitions:
+  JwtToken:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
