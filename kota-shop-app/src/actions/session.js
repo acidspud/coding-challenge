@@ -15,9 +15,11 @@ export const login = user => {
         password: user.password
       })
       .then(response => {
-        setJWT(response.data.data.access_token);
+        const { data } = response.data;
+        
+        setJWT(data.access_token);
         axiosInstance.defaults.headers.common.Authorization = `Authorization ${
-          response.data.data.access_token
+          data.access_token
         }`;
         
         dispatch(loggedInUser({
@@ -26,9 +28,15 @@ export const login = user => {
         }));
       })
       .catch(err => {
-        alert(
-          `Oops, Something went wrong. heres the details:\n\n${err}`
-        );
+        const { details } = err.response.data
+
+        if (details) {
+          alert(details);
+        } else {
+          alert(
+            `Oops, Something went wrong. heres the details:\n\n${err}`
+          );
+        }
       });
   };
 };
@@ -49,8 +57,9 @@ export const signup = user => {
        }
       })
       .catch(err => {
+        const { details } = err.response.data
         alert(
-          `Oops, Something went wrong. heres the details:.\n\n${err}`
+          `Oops, Something went wrong. heres the details:.\n\n${details}`
         );
       });
   };

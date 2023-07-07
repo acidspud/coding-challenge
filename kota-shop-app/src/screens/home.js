@@ -43,12 +43,13 @@ function Home() {
         <div className="item-list">
           {itemList.map(item => (
             <div key={item.id} className="item-item">
+              <p>{item.name}</p>
               <div className="item-item-buttons">
                 <button onClick={() => dispatch(deleteItem(item.id))}>
                   <FontAwesomeIcon icon={faTimes} />
                 </button>
               </div>
-              <p>{item.name}</p>
+
             </div>
           ))}
         </div>
