@@ -10,6 +10,7 @@ import (
 type RedisRepository interface {
 	Set(key string, value interface{}, exp time.Duration) error
 	Get(key string) (string, error)
+	Delete(key string) error
 }
 
 type redisRepository struct {
@@ -31,4 +32,9 @@ func (r *redisRepository) Set(key string, value interface{}, exp time.Duration) 
 // Get attaches the redis repository and get the data
 func (r *redisRepository) Get(key string) (string, error) {
 	return r.client.Get(key).Result()
+}
+
+// Get attaches the redis repository and get the data
+func (r *redisRepository) Delete(key string) error {
+	return r.client.Del(key).Err()
 }

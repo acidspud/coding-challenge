@@ -36,6 +36,11 @@ func (u *itemUsecase) Create(c context.Context, request *request.CreateItemReq) 
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 	})
+
+	if err == nil {
+		u.redisRepo.Delete("items")
+	}
+
 	return
 }
 
@@ -87,6 +92,11 @@ func (u *itemUsecase) Update(c context.Context, id int64, request *request.Updat
 	item.UpdatedAt = time.Now()
 
 	err = u.itemRepo.Update(ctx, &item)
+
+	if err == nil {
+		u.redisRepo.Delete("items")
+	}
+
 	return
 }
 
@@ -104,5 +114,10 @@ func (u *itemUsecase) Delete(c context.Context, id int64) (err error) {
 	}
 
 	err = u.itemRepo.Delete(ctx, id)
+
+	if err == nil {
+		u.redisRepo.Delete("items")
+	}
+
 	return
 }
