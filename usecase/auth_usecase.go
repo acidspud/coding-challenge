@@ -64,14 +64,14 @@ func (u *authUsecase) SignIn(c context.Context, request *request.SignInReq) (acc
 	user, err := u.userRepo.GetByEmail(ctx, request.Email)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			err = utils.NewBadRequestError("email and password not match")
+			err = utils.NewBadRequestError("Incorrect username or password, please try again.")
 			return
 		}
 		return
 	}
 
 	if !u.cryptoSvc.ValidatePassword(ctx, user.Password, request.Password) {
-		err = utils.NewBadRequestError("email and password not match")
+		err = utils.NewBadRequestError("Incorrect username or password, please try again.")
 		return
 	}
 

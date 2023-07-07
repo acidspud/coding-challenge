@@ -53,7 +53,7 @@ func (h *AuthHandler) SignUp(c echo.Context) error {
 	}
 
 	return c.JSON(http.StatusOK, map[string]interface{}{
-		"message": "signup successfully",
+		"message": "Signup successfully",
 	})
 }
 
