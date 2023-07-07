@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import propTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import cookie from "react-cookies";
-import { login } from "../actions/session";
+import { login, signup } from "../actions/session";
 
 export default function Login({ history }) {
   const [user, setUser] = useState({
@@ -63,7 +63,7 @@ export default function Login({ history }) {
             type="button"
             onClick={() =>
               dispatch(
-                login(user)
+                signup(user)
               )
             }
           >

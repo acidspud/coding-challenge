@@ -15,7 +15,6 @@ export const login = user => {
         password: user.password
       })
       .then(response => {
-        // We meet again data.data :)
         setJWT(response.data.data.access_token);
         axiosInstance.defaults.headers.common.Authorization = `Authorization ${
           response.data.data.access_token
@@ -28,7 +27,30 @@ export const login = user => {
       })
       .catch(err => {
         alert(
-          `Server not available. Please make sure it is running.\n\n${err}`
+          `Oops, Something went wrong. heres the details:\n\n${err}`
+        );
+      });
+  };
+};
+
+export const signup = user => {
+  return dispatch => {
+    axiosInstance
+      .post("auth/signup", {
+        email: user.email,
+        password: user.password
+      })
+      .then(response => {
+       if (response.data.message === 'signup successfully') {
+        dispatch(login({
+          email: user.email,
+          password: user.password
+        }));
+       }
+      })
+      .catch(err => {
+        alert(
+          `Oops, Something went wrong. heres the details:.\n\n${err}`
         );
       });
   };
