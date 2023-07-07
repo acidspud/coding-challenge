@@ -1,18 +1,21 @@
 import { axiosInstance } from "../helpers/configured_axios";
-import { FETCH_TODO_LIST } from "./actionTypes";
+import { FETCH_ITEM_LIST } from "./actionTypes";
 
 export const fetchItemList = () => {
-  const request = axiosInstance.get("/items");
+  const payload = axiosInstance.get("/items").then(
+      response => {
+        return response.data.data || []
+      }
+  );
 
   return {
-    type: FETCH_TODO_LIST,
-    payload: request
+    type: FETCH_ITEM_LIST,
+    payload,
   };
 };
 
 export const addItem = item => {
   return dispatch => {
-    debugger;
     axiosInstance.post("/items", { name: item }).then(() => {
       dispatch(fetchItemList());
     });

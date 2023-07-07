@@ -23,7 +23,6 @@ export default function Login({ history }) {
   );
 
   const handleChange = (event) => {
-    debugger;
     const {id, value} = event.target
 
     setUser({
