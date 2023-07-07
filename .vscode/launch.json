@@ -5,10 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch Package",
+            "name": "Debug Go Rest Server",
             "type": "go",
             "request": "launch",
-            "program": "${file}",
+            "program": "./cmd/api/main.go",
             "cwd": "${workspaceFolder}"
         }
     ]
