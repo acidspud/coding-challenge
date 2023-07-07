@@ -252,6 +252,15 @@ const docTemplate = `{
             "properties": {
                 "name": {
                     "type": "string"
+                },
+                "qty": {
+                    "type": "integer"
+                },
+                "threshold": {
+                    "type": "integer"
+                },
+                "price": {
+                    "type": "integer"
                 }
             }
         },
@@ -282,6 +291,15 @@ const docTemplate = `{
             "properties": {
                 "name": {
                     "type": "string"
+                },
+                "qty": {
+                    "type": "integer"
+                },
+                "threshold": {
+                    "type": "integer"
+                },
+                "price": {
+                    "type": "integer"
                 }
             }
         }

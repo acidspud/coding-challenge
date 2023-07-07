@@ -8,8 +8,11 @@ import (
 )
 
 type Item struct {
-	ID        int64     `json:"id"`
+	ID        int       `json:"id"`
 	Name      string    `json:"name"`
+	Qty       *int16    `json:"qty"`
+	Threshold *int16    `json:"threshold"`
+	Price     *int64    `json:"price"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }

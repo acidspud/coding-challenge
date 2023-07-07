@@ -20,19 +20,32 @@ func NewPgsqlItemRepository(db *sql.DB) *pgsqlItemRepository {
 }
 
 func (r *pgsqlItemRepository) Create(ctx context.Context, item *domain.Item) (err error) {
-	query := "INSERT INTO items (name, created_at, updated_at) VALUES ($1, $2, $3)"
-	_, err = r.db.ExecContext(ctx, query, item.Name, item.CreatedAt, item.UpdatedAt)
+	query := "INSERT INTO items (name, qty, threshold, price, created_at, updated_at) VALUES ($1, $2, $3, $4, $5, $6)"
+	_, err = r.db.ExecContext(ctx, query,
+		item.Name,
+		item.Qty,
+		item.Threshold,
+		item.Price,
+		item.CreatedAt,
+		item.UpdatedAt)
 	return
 }
 
 func (r *pgsqlItemRepository) GetByID(ctx context.Context, id int64) (item domain.Item, err error) {
-	query := "SELECT id, name, created_at, updated_at FROM items WHERE id = $1"
-	err = r.db.QueryRowContext(ctx, query, id).Scan(&item.ID, &item.Name, &item.CreatedAt, &item.UpdatedAt)
+	query := "SELECT id, name, qty, threshold, price, created_at, updated_at FROM items WHERE id = $1"
+	err = r.db.QueryRowContext(ctx, query, id).Scan(
+		&item.ID,
+		&item.Name,
+		&item.Qty,
+		&item.Threshold,
+		&item.Price,
+		&item.CreatedAt,
+		&item.UpdatedAt)
 	return
 }
 
 func (r *pgsqlItemRepository) Fetch(ctx context.Context) (items []domain.Item, err error) {
-	query := "SELECT id, name, created_at, updated_at FROM items"
+	query := "SELECT id, name, qty, threshold, price, created_at, updated_at FROM items"
 	rows, err := r.db.QueryContext(ctx, query)
 	if err != nil {
 		return items, err
@@ -42,7 +55,14 @@ func (r *pgsqlItemRepository) Fetch(ctx context.Context) (items []domain.Item, e
 
 	for rows.Next() {
 		var item domain.Item
-		err := rows.Scan(&item.ID, &item.Name, &item.CreatedAt, &item.UpdatedAt)
+		err := rows.Scan(
+			&item.ID,
+			&item.Name,
+			&item.Qty,
+			&item.Threshold,
+			&item.Price,
+			&item.CreatedAt,
+			&item.UpdatedAt)
 		if err != nil {
 			return items, err
 		}
@@ -54,8 +74,14 @@ func (r *pgsqlItemRepository) Fetch(ctx context.Context) (items []domain.Item, e
 }
 
 func (r *pgsqlItemRepository) Update(ctx context.Context, item *domain.Item) (err error) {
-	query := "UPDATE items SET name = $1, updated_at = $2 WHERE id = $3"
-	res, err := r.db.ExecContext(ctx, query, item.Name, item.UpdatedAt, item.ID)
+	query := "UPDATE items SET name = $1, qty = $2, threshold = $3, price = $4, updated_at = $5 WHERE id = $6"
+	res, err := r.db.ExecContext(ctx, query,
+		item.Name,
+		item.Qty,
+		item.Threshold,
+		item.Price,
+		item.UpdatedAt,
+		item.ID)
 	if err != nil {
 		return
 	}

@@ -33,6 +33,9 @@ func (u *itemUsecase) Create(c context.Context, request *request.CreateItemReq) 
 
 	err = u.itemRepo.Create(ctx, &domain.Item{
 		Name:      request.Name,
+		Qty:       request.Qty,
+		Threshold: request.Threshold,
+		Price:     request.Price,
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 	})
@@ -89,6 +92,10 @@ func (u *itemUsecase) Update(c context.Context, id int64, request *request.Updat
 	}
 
 	item.Name = request.Name
+	item.Qty = request.Qty
+	item.Threshold = request.Threshold
+	item.Price = request.Price
+
 	item.UpdatedAt = time.Now()
 
 	err = u.itemRepo.Update(ctx, &item)
