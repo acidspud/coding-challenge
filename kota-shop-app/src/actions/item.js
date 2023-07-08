@@ -14,17 +14,22 @@ export const fetchItemList = () => {
   };
 };
 
+const convertPriceToCent = (price) => (price * 100)
+
+
 export const addItem = item => {
+  // Convert price to cent
+  item.price = item.price * 100
   return dispatch => {
-    axiosInstance.post("/items", { name: item }).then(() => {
+    axiosInstance.post("/items", item).then(() => {
       dispatch(fetchItemList());
     });
   };
 };
 
-export const deleteItem = item => {
+export const deleteItem = id => {
   return dispatch => {
-    axiosInstance.delete(`/items/${item}`).then(() => {
+    axiosInstance.delete(`/items/${id}`).then(() => {
       dispatch(fetchItemList());
     });
   };
