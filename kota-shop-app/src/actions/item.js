@@ -14,9 +14,6 @@ export const fetchItemList = () => {
   };
 };
 
-const convertPriceToCent = (price) => (price * 100)
-
-
 export const addItem = item => {
   // Convert price to cent
   item.price = item.price * 100

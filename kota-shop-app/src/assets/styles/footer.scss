@@ -3,6 +3,7 @@
     grid-template-columns: auto auto;
     grid-gap: 20px;
     align-items: center;
+    height: 100px;
     justify-content: right;
     min-height: 70px;
     background-color: #292f33;
@@ -16,8 +17,8 @@
   }
   @media (max-width: 900px) {
     .footer {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-    grid-gap: 0px;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr;
+      grid-gap: 0px;
     }
   }

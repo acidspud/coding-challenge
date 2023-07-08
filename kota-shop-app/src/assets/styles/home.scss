@@ -7,12 +7,9 @@
 
 .add-item {
     display: grid;
-    // grid-template-columns: 1fr;
-    // grid-gap: 10px;
     justify-content: center;
     align-items: center;
     height: 100%;
-    // padding: 10px;
     background-color: $blue;
     color: $white;
     border: none;
@@ -23,7 +20,6 @@
     .item-buttons {
         display: grid;
         grid-gap: 10px;
-        // grid-column: 1;
         grid-template-columns: 1fr 1fr;
     }
 
@@ -72,7 +68,6 @@
         display: grid;
         grid-template-columns: auto auto;
         grid-gap: 5px;
-        // padding: 0px 15px;
         font-size: 20px;
         background-color: transparent;
         border: none;
@@ -102,10 +97,8 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr auto;
     grid-template-rows: auto 1fr;
-    // grid-gap: 5px;
     justify-content: center;
     align-items: center;
-    width: calc(100% - 40px);
     padding: 20px;
     background-color: $blue;
     color: $white;
@@ -118,11 +111,6 @@
         width: 100%;
         min-width: 80px;
     }
-
-    // svg {
-    //     align-self: right;
-
-    // }
 }
 
 .item-item-buttons {
@@ -140,26 +128,6 @@ form.simple-form {
 
 
     label {
-        // margin: 20px;
-        // position: relative;
-
-        span {
-            position: absolute;
-            top: 0;
-            font-size: 10px;
-            padding: 15px 0 0 15px;
-            color: $shadow-light;
-
-            transition: all .15s linear;
-
-            &.value-exists {
-                position: absolute;
-                top: 0;
-                padding: 10px 0 0 15px;
-                font-size: 13px;
-            }
-        }
-
         p {
             font-size: 15px;
             margin-left: 1px;
@@ -181,7 +149,7 @@ form.simple-form {
                 background-color: #fff;
                 color: $black-grey;
                 box-shadow: none;
-                // border-color: #fff;
+                border-color: #fff;
             }
 
             &:focus~span {
@@ -194,7 +162,7 @@ form.simple-form {
     }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1024px) {
     .home-container {
         margin: 10px;
     }

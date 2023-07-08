@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,  useRef} from "react";
 import { useDispatch, useSelector } from "react-redux"
 import ReactModal from 'react-modal';
 import { addItem, fetchItemList, deleteItem } from "../actions/item";
@@ -32,7 +32,8 @@ function Home() {
   }
 
   const [item, setItem] = useState({...defaultItem});
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+
 
   useEffect(
     () => {
@@ -43,19 +44,33 @@ function Home() {
 
   const handleSetItem = ({key, value}) => {
     let updateValue = {}
-    updateValue[key] = value;
-    setItem({
-      ...item,
-      ...updateValue
-    });
 
+    if (key) {
+      updateValue[key] = value;
+      setItem({
+        ...item,
+        ...updateValue
+      });
+    }
   }
 
+  const nameRef = useRef();
+
   const newItem = () => {
-    if (item) {
+    const { name } = item
+
+    // Quick validation on name field
+    if (item && name && name.trim() !== '') {
       dispatch(addItem(item));
       setItem(defaultItem);
+      setIsOpen(false)
     }
+
+    setItem({
+      ...item,
+      name: ''
+    });
+    nameRef.current.focus();
   };
 
   return (
@@ -73,10 +88,15 @@ function Home() {
               <input
                 id="name"
                 type="text"
-                placeholder=""
+                ref={nameRef}
+                placeholder="Item name here"
                 onChange={e => handleSetItem({
                   key: e.target.id,
                   value: e.target.value})
+                }
+                onBlur={e => handleSetItem({
+                  key: e.target.id,
+                  value: e.target.value.trim()})
                 }
                 value={item.name}
                 required
@@ -87,7 +107,7 @@ function Home() {
               <input
                 id="qty"
                 type="text"
-                inputmode="numeric"
+                inputMode="numeric"
                 pattern="^(\d{1,4})$"
                 placeholder=""
                 onChange={e => handleSetItem({
@@ -106,7 +126,7 @@ function Home() {
               <input
                 id="threshold"
                 type="text"
-                inputmode="numeric"
+                inputMode="numeric"
                 pattern="^(\d{1,4})$"
                 onChange={e => handleSetItem({
                   key: e.target.id,
@@ -151,8 +171,8 @@ function Home() {
       <Fade top>
         <div className="add-item-button">
           <button onClick={() => setIsOpen(true)}>
-          <FontAwesomeIcon icon={faAdd} />
-            <p>Add Item</p>
+            <FontAwesomeIcon icon={faAdd} />
+              <p>Add Item</p>
           </button>
         </div>
       </Fade>
