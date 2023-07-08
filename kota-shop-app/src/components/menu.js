@@ -35,17 +35,21 @@ function Menu() {
           </Link>
         )}
       </div>
-      <div className="mobile-layout">
-        <Link className="mobile-layout-title" to="/">
-          <p>KoTa Shop</p>
-        </Link>
-        <div
-          className="mobile-layout-icon"
-          onClick={() => setOpenMenu(!openMenu)}
-        >
-          <FontAwesomeIcon icon={openMenu ? faTimes : faBars} />
+
+        <div className="mobile-layout">
+          <Link className="mobile-layout-title" to="/">
+            <p>KoTa Shop</p>
+          </Link>
+          {location.pathname !== "/login" && (
+            <div
+              className="mobile-layout-icon"
+              onClick={() => setOpenMenu(!openMenu)}
+            >
+              <FontAwesomeIcon icon={openMenu ? faTimes : faBars} />
+            </div>
+           )}
         </div>
-      </div>
+
     </Fragment>
   );
 }
