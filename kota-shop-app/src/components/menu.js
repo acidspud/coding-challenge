@@ -10,6 +10,11 @@ function Menu() {
   const [openMenu, setOpenMenu] = useState(false);
   const location = useLocation();
 
+  const handleLogout = () => {
+    setOpenMenu(false)
+    logout()
+  }
+
   return (
     <Fragment>
       <div className={`menu-container menu-container${!openMenu && "--close"}`}>
@@ -24,7 +29,7 @@ function Menu() {
           <Link
             className="menu-item menu-item--logout"
             to="/login"
-            onClick={() => logout()}
+            onClick={handleLogout}
           >
             <p className="menu-item-p">Logout</p>
           </Link>
