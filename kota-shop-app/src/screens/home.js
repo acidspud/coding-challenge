@@ -78,7 +78,7 @@ function Home() {
       <ReactModal
         style={customStyles}
         isOpen={isOpen}
-        contentLabel="Example Modal"
+        contentLabel="Item"
       >
       <div className="add-item">
         <form className="simple-form">
@@ -180,7 +180,7 @@ function Home() {
         <div className="item-list">
           {itemList.map(item => (
             <div key={item.id} className="item-item">
-              <p>{item.name}</p>
+              <p>{ item.name.charAt(0).toUpperCase() + item.name.slice(1)}</p>
               <p>{item.qty} In Stock</p>
               <p>R {(item.price/100).toFixed(2)}</p>
               <div className="item-item-buttons">
