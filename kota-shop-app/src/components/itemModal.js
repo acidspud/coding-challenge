@@ -88,8 +88,8 @@ function ItemModal(props) {
   }
 
   const cancel = () => {
-    setItem(defaultItem);
     setIsOpen(false)
+    setItem(defaultItem);
   }
 
   const nameRef = useRef();

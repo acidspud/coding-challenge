@@ -35,7 +35,6 @@ function Home() {
       setItem({...item})
     } else {
       setItem({...defaultItem})
-
     }
     setModalIsOpen(true)
   }
