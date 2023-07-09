@@ -16,15 +16,24 @@ import (
 	"github.com/stretchr/testify/mock"
 )
 
+func Ptr[T any](v T) *T {
+	return &v
+}
+
 func TestItemUC_Create(t *testing.T) {
 	mockRedisRepo := new(mocks.RedisRepository)
 	mockItemRepo := new(mocks.ItemRepository)
+
 	createItemReq := request.CreateItemReq{
-		Name: "name",
+		Name:      "name",
+		Qty:       Ptr(int16(5)),
+		Threshold: Ptr(int16(2)),
+		Price:     Ptr(int64(2099)),
 	}
 
 	t.Run("success", func(t *testing.T) {
 		mockItemRepo.On("Create", mock.Anything, mock.AnythingOfType("*domain.Item")).Return(nil).Once()
+		mockRedisRepo.On("Delete", mock.AnythingOfType("string")).Return(nil).Once()
 
 		itemUsecase := usecase.NewItemUsecase(mockItemRepo, mockRedisRepo, 60*time.Second)
 		err := itemUsecase.Create(context.TODO(), &createItemReq)
@@ -152,19 +161,27 @@ func TestTooUC_Fetch(t *testing.T) {
 func TestItemUC_Update(t *testing.T) {
 	mockRedisRepo := new(mocks.RedisRepository)
 	mockItemRepo := new(mocks.ItemRepository)
+
 	mockItem := domain.Item{
 		ID:        1,
 		Name:      "name",
+		Qty:       Ptr(int16(5)),
+		Threshold: Ptr(int16(2)),
+		Price:     Ptr(int64(2099)),
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 	}
 	updateItemReq := request.UpdateItemReq{
-		Name: "name 2",
+		Name:      "name 2",
+		Qty:       Ptr(int16(5)),
+		Threshold: Ptr(int16(2)),
+		Price:     Ptr(int64(2099)),
 	}
 
 	t.Run("success", func(t *testing.T) {
 		mockItemRepo.On("GetByID", mock.Anything, mock.AnythingOfType("int64")).Return(mockItem, nil).Once()
 		mockItemRepo.On("Update", mock.Anything, mock.AnythingOfType("*domain.Item")).Return(nil).Once()
+		mockRedisRepo.On("Delete", mock.AnythingOfType("string")).Return(nil).Once()
 
 		itemUsecase := usecase.NewItemUsecase(mockItemRepo, mockRedisRepo, 60*time.Second)
 		err := itemUsecase.Update(context.TODO(), mockItem.ID, &updateItemReq)
@@ -211,6 +228,7 @@ func TestItemUC_Delete(t *testing.T) {
 	t.Run("success", func(t *testing.T) {
 		mockItemRepo.On("GetByID", mock.Anything, mock.AnythingOfType("int64")).Return(mockItem, nil).Once()
 		mockItemRepo.On("Delete", mock.Anything, mock.AnythingOfType("int64")).Return(nil).Once()
+		mockRedisRepo.On("Delete", mock.AnythingOfType("string")).Return(nil).Once()
 
 		itemRepository := usecase.NewItemUsecase(mockItemRepo, mockRedisRepo, 60*time.Second)
 		err := itemRepository.Delete(context.TODO(), mockItem.ID)

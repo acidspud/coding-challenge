@@ -21,10 +21,17 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
+func Ptr[T any](v T) *T {
+	return &v
+}
+
 func TestItemHandler_Create(t *testing.T) {
 	mockItemUC := new(mocks.ItemUsecase)
 	createItemReq := request.CreateItemReq{
-		Name: "name",
+		Name:      "name",
+		Qty:       Ptr(int16(5)),
+		Threshold: Ptr(int16(2)),
+		Price:     Ptr(int64(2099)),
 	}
 
 	t.Run("success", func(t *testing.T) {
@@ -112,6 +119,9 @@ func TestItemHandler_GetByID(t *testing.T) {
 	mockItem := domain.Item{
 		ID:        1,
 		Name:      "name",
+		Qty:       Ptr(int16(5)),
+		Threshold: Ptr(int16(2)),
+		Price:     Ptr(int64(2099)),
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 	}
@@ -254,11 +264,17 @@ func TestItemHandler_Update(t *testing.T) {
 	mockItem := domain.Item{
 		ID:        1,
 		Name:      "name",
+		Qty:       Ptr(int16(5)),
+		Threshold: Ptr(int16(2)),
+		Price:     Ptr(int64(2099)),
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 	}
 	updateItemReq := request.UpdateItemReq{
-		Name: "name",
+		Name:      "name",
+		Qty:       Ptr(int16(5)),
+		Threshold: Ptr(int16(2)),
+		Price:     Ptr(int64(2099)),
 	}
 
 	t.Run("success", func(t *testing.T) {
