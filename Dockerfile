@@ -11,9 +11,21 @@ WORKDIR /app
 
 # Copy all other source code to work directory
 COPY . .
+COPY .env-build ./.env
 
 # Download all the dependencies that are required
 RUN go mod tidy
+
+# Install yarn to build the frontend
+RUN apk update && apk add --update-cache \
+    nodejs \
+    npm \
+    yarn \
+&& rm -rf /var/cache/apk/*
+
+RUN rm -rf /app/kota-shop-app/node_modules
+RUN yarn --cwd /app/kota-shop-app install
+RUN yarn --cwd /app/kota-shop-app run build
 
 # Build the application
 RUN go build -o binary cmd/api/main.go

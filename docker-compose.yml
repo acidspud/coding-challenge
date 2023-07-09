@@ -1,27 +1,78 @@
 version: '3.7'
 
 services:
-  postgres:
-    container_name: postgres_container
-    image: postgres
-    environment:
-      POSTGRES_DB: kota_shop
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      PGDATA: /data/postgres
-    volumes:
-       - postgres:/data/postgres
-    ports:
-      - "5432:5432"
-    restart: unless-stopped
-  redis:
-    container_name: redis_container
-    image: redis
-    ports:
-      - '6379:6379'
-    restart: unless-stopped
-    volumes: 
-      - redis:/data
+    postgres:
+        container_name: postgres_container
+        image: postgres
+        networks:
+            net1:
+                aliases:
+                    - database
+        environment:
+            POSTGRES_DB: kota_shop
+            PGUSER: postgres
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            PGDATA: /data/postgres
+        volumes:
+            - postgres:/data/postgres
+        ports:
+            - "5432:5432"
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+    migrate:
+        container_name: migrate_container
+        image: migrate/migrate
+        depends_on:
+            postgres:
+                condition: service_healthy
+        networks:
+            - net1
+        volumes:
+            - migration:/migration
+        command: [
+            "-path",
+            "/migration/",
+            "-database",
+            "postgres://postgres:postgres@database:5432/kota_shop?sslmode=disable",
+            "up"]
+        links:
+            - postgres
+    redis:
+      container_name: redis_container
+      image: redis
+      networks:
+          net1:
+              aliases:
+                  - redis
+      ports:
+          - '6379:6379'
+      volumes:
+          - redis:/data
+      healthcheck:
+          test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
+          interval: 1s
+          timeout: 3s
+          retries: 5
+    kota-shop:
+        container_name: kota_shop_container
+        build: .
+        depends_on:
+            postgres:
+                condition: service_healthy
+        networks:
+            - net1
+        volumes:
+            - migration:/migration
+        ports:
+            - 8080:8080
+networks:
+    net1:
+       driver: bridge
 volumes:
-  postgres:
-  redis:
+    postgres:
+    redis:
+    migration:
