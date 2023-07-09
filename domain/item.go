@@ -8,7 +8,7 @@ import (
 )
 
 type Item struct {
-	ID        int       `json:"id"`
+	ID        int64     `json:"id"`
 	Name      string    `json:"name"`
 	Qty       *int16    `json:"qty"`
 	Threshold *int16    `json:"threshold"`
