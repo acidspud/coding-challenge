@@ -12,7 +12,7 @@ export default function Login({ history }) {
 
   const session = useSelector(state => state.session);
   const dispatch = useDispatch();
-  
+
   useEffect(
     () => {
       if (session && cookie.load("jwt")) {
@@ -34,18 +34,18 @@ export default function Login({ history }) {
   return (
     <div className="login-screen">
       <div className="login-container">
-        <input 
-          id="email" 
+        <input
+          id="email"
           type="text"
-          placeholder="Email" 
-          onChange={handleChange} 
-          value={user.email} 
+          placeholder="Email"
+          onChange={handleChange}
+          value={user.email}
         />
-        <input 
+        <input
           id="password"
           type="password"
-          placeholder="Password" 
-          onChange={handleChange} 
+          placeholder="Password"
+          onChange={handleChange}
           value={user.password}
         />
         <div>
