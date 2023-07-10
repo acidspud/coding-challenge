@@ -16,12 +16,12 @@ export const login = user => {
       })
       .then(response => {
         const { data } = response.data;
-        
+
         setJWT(data.access_token);
         axiosInstance.defaults.headers.common.Authorization = `Authorization ${
           data.access_token
         }`;
-        
+
         dispatch(loggedInUser({
           email: user.email,
           token: response.data.data.access_token
@@ -49,7 +49,7 @@ export const signup = user => {
         password: user.password
       })
       .then(response => {
-       if (response.data.message === 'signup successfully') {
+       if (response.data.message === 'Signup successfully') {
         dispatch(login({
           email: user.email,
           password: user.password
