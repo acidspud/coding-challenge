@@ -63,7 +63,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-A full-stack application for chefs in Kota shops to manage food items. Built with Go (Golang) for the back-end and a JavaScript framework for the front-end. Features include adding, updating, and deleting food items, user registration, JWT-based authentication, and a dashboard for inventory levels. Seamlessly integrates with a preferred database system and can be easily deployed using Docker.
+A full-stack application for chefs in Kota shops to manage food items. Built with Golang for the back-end and ReactJS for the front-end. Features include adding, updating, and deleting food items, user registration, JWT-based authentication, and a dashboard for inventory levels. Seamlessly integrates with a postgres database and can be easily deployed using Docker.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -92,6 +92,7 @@ A full-stack application for chefs in Kota shops to manage food items. Built wit
 
 To run the project, you need Docker and Docker Compose installed. The project is containerized, simplifying deployment. It includes a database migration strategy for table setup during startup. There is also a test user available for initial testing.
 
+Additionally, useful development commands are available in the Golang Makefile, providing convenient functionality during the development process.
 
 
 ### Installation
