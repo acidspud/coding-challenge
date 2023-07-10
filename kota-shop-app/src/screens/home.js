@@ -26,10 +26,6 @@ function Home() {
     [dispatch, itemList.length]
   );
 
-  const handleAddItem = () => {
-
-  }
-
   const handleEditItem = (item) => {
     if (item) {
       setItem({...item})
@@ -38,6 +34,27 @@ function Home() {
     }
     setModalIsOpen(true)
   }
+
+  const sortItems = (a, b) => {
+    const fa = a.name.toLowerCase(),
+      fb = b.name.toLowerCase();
+
+    const lowStockA = (a.threshold - a.qty),
+      lowStockB = (b.threshold - b.qty)
+
+    if (lowStockA >= lowStockB ){
+      if (lowStockA === lowStockB) {
+        if (fa < fb) return -1
+        if (fa > fb) return 1
+        return 0
+      }
+      return -1;
+    }
+
+    return 0;
+  }
+
+  const belowThreshold = (item) => (item.threshold - item.qty)
 
   return (
     <div className="screen home-container">
@@ -48,7 +65,7 @@ function Home() {
       />
       <Fade top>
         <div className="add-item-button">
-          <button onClick={() => handleEditItem()}>
+          <button onClick={() => handleEditItem(null)}>
             <FontAwesomeIcon icon={ faAdd } />
               <p>Add Item</p>
           </button>
@@ -56,19 +73,24 @@ function Home() {
       </Fade>
       <Fade bottom cascade>
         <div className="item-list">
-          { itemList.map(item => (
-            <div key={ item.id } className="item-item">
-              <p>{ item.name.charAt(0).toUpperCase() + item.name.slice(1) }</p>
-              <p>{ item.qty } In Stock</p>
-              <p>R { (item.price/100).toFixed(2) }</p>
-              <div className="item-item-buttons">
-              <button onClick={ () => handleEditItem(item) }>
-                  <FontAwesomeIcon size="2x" icon={ faPenToSquare } />
-                </button>
-                <button onClick={() => dispatch(deleteItem(item.id))}>
-                  <FontAwesomeIcon size="2x" icon={ faTimes } />
-                </button>
-              </div>
+          { itemList
+            .sort(sortItems)
+            .map(item => (
+            <div key={ item.id }
+              className={ `item-item ${belowThreshold(item) >= 0 ? 'outofstock' : '' }`}>
+
+                <p>{ item.name.charAt(0).toUpperCase() + item.name.slice(1) }</p>
+                <p>{ belowThreshold(item) >= 0 ? `${belowThreshold(item)} Item/s Below Threshold of ${ item.threshold }` : ''}</p>
+                <p>{ item.qty } In Stock</p>
+                <p>R { (item.price/100).toFixed(2) }</p>
+                <div className="item-item-buttons">
+                <button onClick={ () => handleEditItem(item) }>
+                    <FontAwesomeIcon size="2x" icon={ faPenToSquare } />
+                  </button>
+                  <button onClick={() => dispatch(deleteItem(item.id))}>
+                    <FontAwesomeIcon size="2x" icon={ faTimes } />
+                  </button>
+                </div>
 
             </div>
           ))}

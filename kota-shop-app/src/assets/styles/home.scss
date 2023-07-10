@@ -95,12 +95,14 @@
 
 .item-item {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr auto;
     grid-template-rows: auto 1fr;
     justify-content: center;
     align-items: center;
     padding: 20px;
     background-color: $blue;
+
+
     color: $white;
     border: none;
     border-radius: 15px;
@@ -110,6 +112,11 @@
         font-size: 10px;
         width: 100%;
         min-width: 80px;
+
+    }
+
+    &.outofstock {
+        background-color: $orange;
     }
 }
 
