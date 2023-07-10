@@ -105,13 +105,14 @@ Additionally, useful development commands are available in the Golang Makefile, 
    ```sh
    docker-compose up
    ```
-3. Access the site at `localhost:8080`
+3. Access the site at [localhost:8080/](http://localhost:8080/)
 4. Test user credentials is `test@gmail.com:12345678`
     ```js
       username: test@gmail.com
       password: 12345678
     ```
-
+5. Consume the API at `localhost:8080/api/*`
+6. Access the Swagger Docs at [localhost:8080/swagger/](http://localhost:8080/swagger/index.html)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
