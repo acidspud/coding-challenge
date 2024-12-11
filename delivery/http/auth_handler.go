@@ -3,10 +3,10 @@ package http
 import (
 	"net/http"
 
-	"github.com/acidspud/gotbot-coding-challange/delivery/middleware"
-	"github.com/acidspud/gotbot-coding-challange/domain"
-	"github.com/acidspud/gotbot-coding-challange/transport/request"
-	"github.com/acidspud/gotbot-coding-challange/utils"
+	"github.com/acidspud/coding-challange/delivery/middleware"
+	"github.com/acidspud/coding-challange/domain"
+	"github.com/acidspud/coding-challange/transport/request"
+	"github.com/acidspud/coding-challange/utils"
 	validation "github.com/go-ozzo/ozzo-validation"
 	"github.com/labstack/echo/v4"
 )

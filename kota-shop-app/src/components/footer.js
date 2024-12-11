@@ -8,9 +8,9 @@ function Footer() {
     <Fragment>
       <div className="footer">
         <Fade right cascade>
-          <a href="https://github.com/acidspud/gotbot-coding-challange">
-            <p>Gotbot Coding Challenge on&nbsp;
-            <FontAwesomeIcon icon={faGithub} /> 
+          <a href="https://github.com/acidspud/coding-challange">
+            <p>Coding Challenge on&nbsp;
+            <FontAwesomeIcon icon={faGithub} />
             &nbsp;GitHub</p>
           </a>
         </Fade>

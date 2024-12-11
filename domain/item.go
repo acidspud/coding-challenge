@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/acidspud/gotbot-coding-challange/transport/request"
+	"github.com/acidspud/coding-challange/transport/request"
 )
 
 type Item struct {

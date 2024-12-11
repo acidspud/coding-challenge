@@ -8,10 +8,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/acidspud/gotbot-coding-challange/domain"
-	"github.com/acidspud/gotbot-coding-challange/mocks"
-	"github.com/acidspud/gotbot-coding-challange/transport/request"
-	"github.com/acidspud/gotbot-coding-challange/usecase"
+	"github.com/acidspud/coding-challange/domain"
+	"github.com/acidspud/coding-challange/mocks"
+	"github.com/acidspud/coding-challange/transport/request"
+	"github.com/acidspud/coding-challange/usecase"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )

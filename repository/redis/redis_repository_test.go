@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	redisRepo "github.com/acidspud/gotbot-coding-challange/repository/redis"
+	redisRepo "github.com/acidspud/coding-challange/repository/redis"
 	"github.com/alicebob/miniredis"
 	"github.com/go-redis/redis"
 	"github.com/stretchr/testify/assert"

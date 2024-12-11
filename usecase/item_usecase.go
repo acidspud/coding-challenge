@@ -6,10 +6,10 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/acidspud/gotbot-coding-challange/domain"
-	"github.com/acidspud/gotbot-coding-challange/repository/redis"
-	"github.com/acidspud/gotbot-coding-challange/transport/request"
-	"github.com/acidspud/gotbot-coding-challange/utils"
+	"github.com/acidspud/coding-challange/domain"
+	"github.com/acidspud/coding-challange/repository/redis"
+	"github.com/acidspud/coding-challange/transport/request"
+	"github.com/acidspud/coding-challange/utils"
 )
 
 type itemUsecase struct {

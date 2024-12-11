@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/acidspud/gotbot-coding-challange/domain"
-	"github.com/acidspud/gotbot-coding-challange/repository/pgsql"
+	"github.com/acidspud/coding-challange/domain"
+	"github.com/acidspud/coding-challange/repository/pgsql"
 	"github.com/stretchr/testify/assert"
 	"gopkg.in/DATA-DOG/go-sqlmock.v1"
 )

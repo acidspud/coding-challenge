@@ -8,9 +8,9 @@ import (
 	"strings"
 	"testing"
 
-	httpDelivery "github.com/acidspud/gotbot-coding-challange/delivery/http"
-	"github.com/acidspud/gotbot-coding-challange/mocks"
-	"github.com/acidspud/gotbot-coding-challange/transport/request"
+	httpDelivery "github.com/acidspud/coding-challange/delivery/http"
+	"github.com/acidspud/coding-challange/mocks"
+	"github.com/acidspud/coding-challange/transport/request"
 	"github.com/labstack/echo/v4"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"

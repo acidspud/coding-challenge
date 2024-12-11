@@ -16,7 +16,7 @@ type jwtService struct {
 func NewJWTService(secretKey string) JWTService {
 	return &jwtService{
 		secretKey: secretKey,
-		issuer:    "go-github.com/acidspud/gotbot-coding-challange",
+		issuer:    "go-github.com/acidspud/coding-challange",
 	}
 }
 

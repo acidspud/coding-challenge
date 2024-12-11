@@ -21,14 +21,14 @@
 <br />
 <div align="center">
 
-  <a href="https://github.com/acidspud/gotbot-coding-challenge">
-    <h3 align="center">GOTBOT CODING CHALLENGE</h3>
+  <a href="https://github.com/acidspud/coding-challenge">
+    <h3 align="center">CODING CHALLENGE</h3>
   </a>
 
   <p align="center">
     FullStack Developer
     <br />
-    <a href="https://github.com/acidspud/gotbot-coding-challenge/tree/main/doc"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/acidspud/coding-challenge/tree/main/doc"><strong>Explore the docs »</strong></a>
     <br />
     <br />
   </p>
@@ -99,7 +99,7 @@ Additionally, useful development commands are available in the Golang Makefile, 
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/acidspud/gotbot-coding-challenge
+   git clone https://github.com/acidspud/coding-challenge
    ```
 2. Run with docker-compose
    ```sh
@@ -133,7 +133,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 Jaques Horn - [@acidspud](https://github.com/acidspud) - jaqueshorn@gmail.com
 
-Project Link: [https://github.com/acidspud/gotbot-coding-challenge](https://github.com/acidspud/gotbot-coding-challenge)
+Project Link: [https://github.com/acidspud/coding-challenge](https://github.com/acidspud/coding-challenge)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -141,16 +141,16 @@ Project Link: [https://github.com/acidspud/gotbot-coding-challenge](https://gith
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/acidspud/gotbot-coding-challenge.svg?style=for-the-badge
-[contributors-url]: https://github.com/acidspud/gotbot-coding-challenge/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/acidspud/gotbot-coding-challenge.svg?style=for-the-badge
-[forks-url]: https://github.com/acidspud/gotbot-coding-challenge/network/members
-[stars-shield]: https://img.shields.io/github/stars/acidspud/gotbot-coding-challenge.svg?style=for-the-badge
-[stars-url]: https://github.com/acidspud/gotbot-coding-challenge/stargazers
-[issues-shield]: https://img.shields.io/github/issues/acidspud/gotbot-coding-challenge.svg?style=for-the-badge
-[issues-url]: https://github.com/acidspud/gotbot-coding-challenge/issues
-[license-shield]: https://img.shields.io/github/license/acidspud/gotbot-coding-challenge.svg?style=for-the-badge
-[license-url]: https://github.com/acidspud/gotbot-coding-challenge/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/acidspud/coding-challenge.svg?style=for-the-badge
+[contributors-url]: https://github.com/acidspud/coding-challenge/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/acidspud/coding-challenge.svg?style=for-the-badge
+[forks-url]: https://github.com/acidspud/coding-challenge/network/members
+[stars-shield]: https://img.shields.io/github/stars/acidspud/coding-challenge.svg?style=for-the-badge
+[stars-url]: https://github.com/acidspud/coding-challenge/stargazers
+[issues-shield]: https://img.shields.io/github/issues/acidspud/coding-challenge.svg?style=for-the-badge
+[issues-url]: https://github.com/acidspud/coding-challenge/issues
+[license-shield]: https://img.shields.io/github/license/acidspud/coding-challenge.svg?style=for-the-badge
+[license-url]: https://github.com/acidspud/coding-challenge/blob/master/LICENSE.txt
 
 [React.js]: https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white
 [React-url]: https://reactjs.org/

@@ -5,11 +5,11 @@ import (
 	"database/sql"
 	"time"
 
-	"github.com/acidspud/gotbot-coding-challange/domain"
-	"github.com/acidspud/gotbot-coding-challange/transport/request"
-	"github.com/acidspud/gotbot-coding-challange/utils"
-	"github.com/acidspud/gotbot-coding-challange/utils/crypto"
-	"github.com/acidspud/gotbot-coding-challange/utils/jwt"
+	"github.com/acidspud/coding-challange/domain"
+	"github.com/acidspud/coding-challange/transport/request"
+	"github.com/acidspud/coding-challange/utils"
+	"github.com/acidspud/coding-challange/utils/crypto"
+	"github.com/acidspud/coding-challange/utils/jwt"
 )
 
 type authUsecase struct {

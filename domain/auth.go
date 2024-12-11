@@ -3,7 +3,7 @@ package domain
 import (
 	"context"
 
-	"github.com/acidspud/gotbot-coding-challange/transport/request"
+	"github.com/acidspud/coding-challange/transport/request"
 )
 
 // AuthUsecase represent the auth usecase contract

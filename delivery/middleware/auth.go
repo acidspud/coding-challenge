@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/acidspud/gotbot-coding-challange/utils"
+	"github.com/acidspud/coding-challange/utils"
 	jwtLib "github.com/golang-jwt/jwt"
 	"github.com/labstack/echo/v4"
 )

@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"github.com/acidspud/gotbot-coding-challange/utils/jwt"
+	"github.com/acidspud/coding-challange/utils/jwt"
 )
 
 // Middleware ...

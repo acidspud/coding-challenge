@@ -5,7 +5,7 @@ import (
 	"database/sql"
 	"fmt"
 
-	"github.com/acidspud/gotbot-coding-challange/domain"
+	"github.com/acidspud/coding-challange/domain"
 )
 
 type pgsqlItemRepository struct {

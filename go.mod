@@ -1,4 +1,4 @@
-module github.com/acidspud/gotbot-coding-challange
+module github.com/acidspud/coding-challange
 
 go 1.20
 

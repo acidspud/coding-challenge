@@ -4,7 +4,7 @@ import (
 	"context"
 	"database/sql"
 
-	"github.com/acidspud/gotbot-coding-challange/domain"
+	"github.com/acidspud/coding-challange/domain"
 )
 
 type pgsqlUserRepository struct {
