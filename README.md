@@ -26,8 +26,6 @@
   <p align="center">
     FullStack Developer
     <br />
-    <a href="https://github.com/acidspud/coding-challenge/tree/main/doc"><strong>Explore the docs »</strong></a>
-    <br />
     <br />
   </p>
 </div>
