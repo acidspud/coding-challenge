@@ -18,7 +18,11 @@ RUN go mod tidy
 
 # Install yarn to build the frontend
 RUN apk update && apk add --update-cache \
+    build-base \
     nodejs \
+    python3 \
+    py3-pip \
+    py3-setuptools \
     npm \
     yarn \
 && rm -rf /var/cache/apk/*
