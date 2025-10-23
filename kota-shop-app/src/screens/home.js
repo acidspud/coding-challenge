@@ -2,7 +2,7 @@ import React, { useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux"
 import ItemModal from "../components/itemModal";
 import { fetchItemList, deleteItem } from "../actions/item";
-import Fade from "react-reveal/Fade";
+import {Fade} from "react-swift-reveal";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAdd, faPenToSquare, faTimes  } from '@fortawesome/free-solid-svg-icons'
 
@@ -63,7 +63,7 @@ function Home() {
         isOpen={ isModalOpen }
         setIsOpen={ setModalIsOpen }
       />
-      <Fade top>
+      <Fade top duration={500} delay={200}>
         <div className="add-item-button">
           <button onClick={() => handleEditItem(null)}>
             <FontAwesomeIcon icon={ faAdd } />
@@ -71,7 +71,7 @@ function Home() {
           </button>
         </div>
       </Fade>
-      <Fade bottom cascade>
+      <Fade bottom cascade duration={500} delay={200}>
         <div className="item-list">
           { itemList
             .sort(sortItems)

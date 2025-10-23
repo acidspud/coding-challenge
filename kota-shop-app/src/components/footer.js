@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import Fade from "react-reveal/Fade";
+import { Fade } from "react-swift-reveal";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 

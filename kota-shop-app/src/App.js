@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from "react";
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from "react-router-dom";
 import { Provider } from "react-redux";
 import cookie from "react-cookies";
 import Loading from "./components/loading";
@@ -9,28 +9,27 @@ import Footer from "./components/footer";
 const Home = lazy(() => import("./screens/home"));
 const Login = lazy(() => import("./screens/login"));
 
-function isAuthenticated() {
-  const accessToken = cookie.load("jwt");
-  return accessToken ? true : false;
+// function isAuthenticated() {
+//   const accessToken = cookie.load("jwt");
+//   return accessToken ? true : false;
+// }
+interface PrivateRouteProps {
+  children: ReactNode;
 }
 
-const ProtectedRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props =>
-      isAuthenticated() ? (
-        <Component {...props} />
-      ) : (
-        <Redirect
-          to={{
-            pathname: "/login",
-            state: { from: props.location }
-          }}
-        />
-      )
-    }
-  />
-);
+const ProtectedRoute = ({ children }: PrivateRouteProps) => {
+  const isAuthenticated = () => {
+    const accessToken = cookie.load("jwt");
+    return accessToken ? true : false;
+  };
+  const location = useLocation();
+
+  if (!isAuthenticated()) {
+        return <Navigate to="/login" state={{ from: location }} replace />
+  }
+
+  return <>{children}</>;
+};
 
 function App() {
   return (
@@ -38,11 +37,15 @@ function App() {
       <Menu />
       <Suspense fallback={<Loading />}>
         <Provider store={store}>
-            <Switch>
-              <Route exact path="/login" component={Login} />
-              <ProtectedRoute exact path="/" component={Home} />
-              <Redirect to="/" />
-            </Switch>
+            <Routes>
+              <Route exact path="/login" element={<Login />} />
+              <Route exact path="/" element={
+                <ProtectedRoute>
+                  <Home />
+                </ProtectedRoute>
+              } />
+              <Route path="*" element={<Navigate to="/" />} />
+            </Routes>
         </Provider>
       </Suspense>
       <Footer />

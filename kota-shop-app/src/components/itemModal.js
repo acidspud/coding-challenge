@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux"
 import propTypes from "prop-types";
 import ReactModal from 'react-modal';
 import { addItem, updateItem } from "../actions/item";
-import Fade from "react-reveal/Fade";
+import { Fade } from "react-swift-reveal";
 
 const customStyles = {
   content: {
@@ -53,7 +53,7 @@ function ItemModal(props) {
     let updateValue = {}
 
     if (key) {
-      updateValue[key] = value;
+      updateValue[key] = key === 'price' ? parseFloat(value) : value;
       setItem({
         ...item,
         ...updateValue
@@ -95,102 +95,102 @@ function ItemModal(props) {
   const nameRef = useRef();
 
   return (
-    <Fade top>
-      <ReactModal
-        style={customStyles}
-        isOpen={props.isOpen}
-        contentLabel="Item"
-        ariaHideApp={false}
-      >
-      <div className="add-item">
-        <form className="simple-form">
+      <Fade top>
+        <ReactModal
+          style={customStyles}
+          isOpen={props.isOpen}
+          contentLabel="Item"
+          ariaHideApp={false}
+        >
+        <div className="add-item">
+          <form className="simple-form">
 
-            <label>
-              <p>Item Name</p>
-              <input
-                id="name"
-                type="text"
-                ref={nameRef}
-                placeholder="Item name here"
-                onChange={e => handleSetItem({
-                  key: e.target.id,
-                  value: e.target.value})
-                }
-                onBlur={e => handleSetItem({
-                  key: e.target.id,
-                  value: e.target.value.trim()})
-                }
-                value={item.name}
-                required
-              />
-            </label>
-            <label>
-              <p>Amount In Stock</p>
-              <input
-                id="qty"
-                type="text"
-                inputMode="numeric"
-                pattern="^(\d{1,4})$"
-                placeholder=""
-                onChange={e => handleSetItem({
-                  key: e.target.id,
-                  value: e.target.validity.valid ? e.target.value : item.qty})
-                }
-                onBlur={e => handleSetItem({
-                  key: e.target.id,
-                  value: e.target.value === ''? 0 : parseFloat(e.target.value)})
-                }
-                value={item.qty}
-              />
-            </label>
-            <label>
-              <p>Threshold</p>
-              <input
-                id="threshold"
-                type="text"
-                inputMode="numeric"
-                pattern="^(\d{1,4})$"
-                onChange={e => handleSetItem({
-                  key: e.target.id,
-                  value: e.target.validity.valid ? e.target.value : item.threshold})
-                }
-                onBlur={e => handleSetItem({
-                  key: e.target.id,
-                  value: e.target.value === ''? 0 : parseFloat(e.target.value)})
-                }
-                value={item.threshold}
+              <label>
+                <p>Item Name</p>
+                <input
+                  id="name"
+                  type="text"
+                  ref={nameRef}
+                  placeholder="Item name here"
+                  onChange={e => handleSetItem({
+                    key: e.target.id,
+                    value: e.target.value})
+                  }
+                  onBlur={e => handleSetItem({
+                    key: e.target.id,
+                    value: e.target.value.trim()})
+                  }
+                  value={item.name}
+                  required
                 />
-            </label>
-            <label>
-              <p>Price</p>
-              <input
-                id="price"
-                type="text"
-                placeholder=""
-                pattern="^([0-9]+(\.?[0-9]?[0-9]?)?)"
-                onChange={e => handleSetItem({
-                  key: e.target.id,
-                  value: e.target.validity.valid ? e.target.value : item.price})
-                }
-                onBlur={e => handleSetItem({
-                  key: e.target.id,
-                  value: e.target.value === '' ? 0 : parseFloat(e.target.value)})
-                }
-                value={item.price}
-              />
-            </label>
-        </form>
-        <div className="item-buttons">
-          <button onClick={() => handleAcceptButton(item)}>
-            <p>Accept</p>
-          </button>
-          <button onClick={() => cancel()}>
-            <p>Cancel</p>
-          </button>
+              </label>
+              <label>
+                <p>Amount In Stock</p>
+                <input
+                  id="qty"
+                  type="text"
+                  inputMode="numeric"
+                  pattern="^(\d{1,4})$"
+                  placeholder=""
+                  onChange={e => handleSetItem({
+                    key: e.target.id,
+                    value: e.target.validity.valid ? e.target.value : item.qty})
+                  }
+                  onBlur={e => handleSetItem({
+                    key: e.target.id,
+                    value: e.target.value === ''? 0 : parseFloat(e.target.value)})
+                  }
+                  value={item.qty}
+                />
+              </label>
+              <label>
+                <p>Threshold</p>
+                <input
+                  id="threshold"
+                  type="text"
+                  inputMode="numeric"
+                  pattern="^(\d{1,4})$"
+                  onChange={e => handleSetItem({
+                    key: e.target.id,
+                    value: e.target.validity.valid ? e.target.value : item.threshold})
+                  }
+                  onBlur={e => handleSetItem({
+                    key: e.target.id,
+                    value: e.target.value === ''? 0 : parseFloat(e.target.value)})
+                  }
+                  value={item.threshold}
+                  />
+              </label>
+              <label>
+                <p>Price</p>
+                <input
+                  id="price"
+                  type="text"
+                  placeholder=""
+                  pattern="^([0-9]+(\.?[0-9]?[0-9]?)?)"
+                  onChange={e => handleSetItem({
+                    key: e.target.id,
+                    value: e.target.validity.valid ? e.target.value : item.price})
+                  }
+                  onBlur={e => handleSetItem({
+                    key: e.target.id,
+                    value: e.target.value === '' ? 0 : parseFloat(e.target.value)})
+                  }
+                  value={item.price}
+                />
+              </label>
+          </form>
+          <div className="item-buttons">
+            <button onClick={() => handleAcceptButton(item)}>
+              <p>Accept</p>
+            </button>
+            <button onClick={() => cancel()}>
+              <p>Cancel</p>
+            </button>
+          </div>
         </div>
-      </div>
-    </ReactModal>
-  </Fade>
+      </ReactModal>
+    </Fade>
   );
 }
 

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import propTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import cookie from "react-cookies";
 import { login, signup } from "../actions/session";
+import { useNavigate } from "react-router-dom";
 
-export default function Login({ history }) {
+function Login() {
   const [user, setUser] = useState({
     email: 'test@gmail.com',
     password: '12345678'
@@ -13,13 +13,15 @@ export default function Login({ history }) {
   const session = useSelector(state => state.session);
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
+
   useEffect(
     () => {
       if (session && cookie.load("jwt")) {
-        history.push(`/`);
+        navigate(`/`);
       }
     },
-    [session, history]
+    [session, navigate]
   );
 
   const handleChange = (event) => {
@@ -75,8 +77,5 @@ export default function Login({ history }) {
   );
 }
 
-Login.propTypes = {
-  history: propTypes.shape({
-    push: propTypes.func.isRequired
-  }).isRequired
-};
+
+export default Login;
