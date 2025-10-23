@@ -36,20 +36,20 @@ function Home() {
   }
 
   const sortItems = (a, b) => {
-    const fa = a.name.toLowerCase(),
-      fb = b.name.toLowerCase();
+    const lowStockA = a.threshold - a.qty;
+    const lowStockB = b.threshold - b.qty;
 
-    const lowStockA = (a.threshold - a.qty),
-      lowStockB = (b.threshold - b.qty)
-
-    if (lowStockA >= lowStockB ){
-      if (lowStockA === lowStockB) {
-        if (fa < fb) return -1
-        if (fa > fb) return 1
-        return 0
-      }
-      return -1;
+    // Primary sort: by low stock (ascending)
+    if (lowStockA !== lowStockB) {
+      return lowStockA - lowStockB;
     }
+
+    // Secondary sort: by name alphabetically (ascending) if low stock is equal
+    const nameA = a.name.toLowerCase();
+    const nameB = b.name.toLowerCase();
+
+    if (nameA < nameB) return -1;
+    if (nameA > nameB) return 1;
 
     return 0;
   }
