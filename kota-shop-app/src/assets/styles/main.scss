@@ -1,3 +1,10 @@
+@use "colors";
+@use "menu";
+@use "loading";
+@use "login";
+@use "home";
+@use "footer";
+
 body {
     margin: 0px;
     font-family: 'Open Sans', sans-serif;
@@ -7,10 +14,3 @@ body {
     margin-top: 70px;
     min-height: calc(100vh - 70px);
 }
-
-@import "colors";
-@import "menu";
-@import "loading";
-@import "login";
-@import "home";
-@import "footer";

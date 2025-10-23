@@ -1,4 +1,5 @@
 import React, { lazy, Suspense } from "react";
+import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from "react-router-dom";
 import { Provider } from "react-redux";
 import cookie from "react-cookies";
@@ -9,15 +10,11 @@ import Footer from "./components/footer";
 const Home = lazy(() => import("./screens/home"));
 const Login = lazy(() => import("./screens/login"));
 
-// function isAuthenticated() {
-//   const accessToken = cookie.load("jwt");
-//   return accessToken ? true : false;
-// }
-interface PrivateRouteProps {
-  children: ReactNode;
-}
+const PrivateRouteProps = {
+  children: PropTypes.node.isRequired,
+};
 
-const ProtectedRoute = ({ children }: PrivateRouteProps) => {
+const ProtectedRoute = ({ children }) => {
   const isAuthenticated = () => {
     const accessToken = cookie.load("jwt");
     return accessToken ? true : false;
@@ -31,25 +28,31 @@ const ProtectedRoute = ({ children }: PrivateRouteProps) => {
   return <>{children}</>;
 };
 
+ProtectedRoute.propTypes = PrivateRouteProps;
+
 function App() {
   return (
-    <Router basename={process.env.PUBLIC_URL}>
-      <Menu />
-      <Suspense fallback={<Loading />}>
-        <Provider store={store}>
-            <Routes>
-              <Route exact path="/login" element={<Login />} />
-              <Route exact path="/" element={
+    <Provider store={store}>
+      <Router>
+        <Menu />
+        <Suspense fallback={<Loading />}>
+          <Routes>
+            <Route exact path="/login" element={<Login />} />
+            <Route
+              exact
+              path="/"
+              element={
                 <ProtectedRoute>
                   <Home />
                 </ProtectedRoute>
-              } />
-              <Route path="*" element={<Navigate to="/" />} />
-            </Routes>
-        </Provider>
-      </Suspense>
-      <Footer />
-    </Router>
+              }
+            />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </Suspense>
+        <Footer />
+      </Router>
+    </Provider>
 
   );
 }

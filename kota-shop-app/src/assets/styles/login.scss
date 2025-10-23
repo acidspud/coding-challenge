@@ -1,3 +1,4 @@
+@use "colors";
 .login-screen {
     display: grid;
     align-items: center;
@@ -11,14 +12,14 @@
     justify-items: center;
     grid-gap: 30px;
     text-align: center;
-    background-color: $blue;
+    background-color: colors.$blue;
     height: 300px;
     width: 500px;
     padding: 10px;
     max-width: 80vw;
     border-radius: 20px;
-    box-shadow: 0px 8px 14px 3px $shadow-light;
-    color: $blue;
+    box-shadow: 0px 8px 14px 3px colors.$shadow-light;
+    color: colors.$blue;
     animation: zoomIn 1.2s;
     input {
         width: 90%;
@@ -30,7 +31,7 @@
     button {
         background-color: white;
         margin: 0px 10px;
-        color: $blue;
+        color: colors.$blue;
         border: none;
         border-radius: 10px;
         font-size: 25px;
