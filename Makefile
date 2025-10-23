@@ -25,7 +25,7 @@ mock:
 	mockery --all
 
 swagger:
-	swag init -g cmd/api/main.go
+	swag init -g ./cmd/api/main.go
 
 .PHONY:
 	migration-create
