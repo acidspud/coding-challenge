@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/acidspud/coding-challange/utils"
-	jwtLib "github.com/golang-jwt/jwt"
+	jwtLib "github.com/golang-jwt/jwt/v5"
 	"github.com/labstack/echo/v4"
 )
 

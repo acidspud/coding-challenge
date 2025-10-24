@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/golang-jwt/jwt"
+	"github.com/golang-jwt/jwt/v5"
 )
 
 type jwtService struct {
@@ -23,10 +23,10 @@ func NewJWTService(secretKey string) JWTService {
 func (s *jwtService) GenerateToken(ctx context.Context, userID int64) (token string, err error) {
 	claims := &jwtCustomClaims{
 		userID,
-		jwt.StandardClaims{
-			ExpiresAt: time.Now().Add(time.Hour * 72).Unix(),
+		jwt.RegisteredClaims{
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Hour * 72)),
 			Issuer:    s.issuer,
-			IssuedAt:  time.Now().Unix(),
+			IssuedAt:  jwt.NewNumericDate(time.Now()),
 		},
 	}
 
