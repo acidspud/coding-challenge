@@ -1,0 +1,31 @@
+# with-expecter: True
+# inpackage: True
+dir: "mocks"
+# dir: "{{.InterfaceDir}}"
+# mockname: "Mock{{.InterfaceName}}"
+structname: "{{.InterfaceName}}"
+
+# outpkg: "{{.PackageName}}"
+pkgname:  "mocks"
+filename: "{{.InterfaceName}}.go"
+#all: True
+#recursive: True
+packages:
+  github.com/acidspud/coding-challange/repository/redis:
+    interfaces:
+      RedisRepository:
+  github.com/acidspud/coding-challange/domain:
+    interfaces:
+      UserRepository:
+      ItemRepository:
+      AuthUsecase:
+      ItemUsecase:
+  github.com/acidspud/coding-challange/utils:
+    interfaces:
+      HttpErr:
+  github.com/acidspud/coding-challange/utils/jwt:
+    interfaces:
+      JWTService:
+  github.com/acidspud/coding-challange/utils/crypto:
+    interfaces:
+      CryptoService:

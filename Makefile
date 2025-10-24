@@ -22,7 +22,7 @@ test:
 	go test -v ./...
 
 mock:
-	mockery --all
+	mockery
 
 swagger:
 	swag init -g ./cmd/api/main.go
