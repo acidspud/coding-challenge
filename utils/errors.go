@@ -7,7 +7,7 @@ import (
 	"sort"
 
 	validation "github.com/go-ozzo/ozzo-validation"
-	"github.com/labstack/gommon/log"
+	"github.com/rs/zerolog/log"
 )
 
 var (
@@ -118,7 +118,7 @@ func NewForbiddenError(details interface{}) HttpErr {
 
 // New Internal Server Error
 func NewInternalServerError(details interface{}) HttpErr {
-	log.Error(details.(error).Error())
+	log.Error().Err(details.(error)).Msg("internal server error")
 
 	return HttpError{
 		ErrStatus:  http.StatusInternalServerError,
