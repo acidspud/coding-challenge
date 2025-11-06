@@ -1,15 +1,7 @@
-# with-expecter: True
-# inpackage: True
 dir: "mocks"
-# dir: "{{.InterfaceDir}}"
-# mockname: "Mock{{.InterfaceName}}"
 structname: "{{.InterfaceName}}"
-
-# outpkg: "{{.PackageName}}"
 pkgname:  "mocks"
 filename: "{{.InterfaceName}}.go"
-#all: True
-#recursive: True
 packages:
   github.com/acidspud/coding-challange/repository/redis:
     interfaces:
