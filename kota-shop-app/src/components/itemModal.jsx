@@ -5,22 +5,6 @@ import ReactModal from 'react-modal';
 import { addItem, updateItem } from "../actions/item";
 import { Fade } from "react-swift-reveal";
 
-const customStyles = {
-  content: {
-    position: 'absolute',
-    width: '300px',
-    height: '450px',
-    top: '50%',
-    left: '50%',
-    right: '50%',
-    transform: 'translate(-50%, -50%)',
-    padding:'0px',
-    border: 'none',
-    borderRadius: '15px'
-  },
-};
-
-
 function ItemModal(props) {
   const dispatch = useDispatch();
   const defaultItem = {
@@ -33,35 +17,34 @@ function ItemModal(props) {
   const setIsOpen = props.setIsOpen
 
   const [item, setItem] = useState(defaultItem);
+  const [displayPrice, setDisplayPrice] = useState('0.00');
 
   useEffect(() => {
     const formatPriceIn = (oldPrice) => {
-      return oldPrice ? (oldPrice/100).toFixed(2) : 0
+      return oldPrice ? (oldPrice/100).toFixed(2) : '0.00';
     }
 
     if (props.isOpen) {
-
+      const initialPrice = formatPriceIn(props.item.price)
       setItem({
         ...props.item,
-        price: formatPriceIn(props.item.price)
-      })
+        price: initialPrice
+      });
+      setDisplayPrice(initialPrice);
     }
   },[props.isOpen, props.item])
 
 
   const handleSetItem = ({key, value}) => {
-    let updateValue = {}
-
-    if (key) {
-      updateValue[key] = key === 'price' ? parseFloat(value) : value;
-      setItem({
-        ...item,
-        ...updateValue
-      });
+    if (key && key !== 'price') {
+      setItem(prevItem => ({
+        ...prevItem,
+        [key]: value
+      }));
     }
   }
 
-  // Quick validation on name field
+  // Quick validation on the name field
   const validateFields = (item) => {
     const { name } = item
 
@@ -97,22 +80,24 @@ function ItemModal(props) {
   return (
       <Fade top>
         <ReactModal
-          style={customStyles}
           isOpen={props.isOpen}
           contentLabel="Item"
           ariaHideApp={false}
+          overlayClassName="fixed inset-0 bg-black/[var(--bg-opacity)] [--bg-opacity:70%] flex justify-center items-center"
+          className="relative w-11/12 max-w-md h-auto max-h-[90vh] p-0 border-none rounded-xl overflow-y-auto outline-none"
         >
-          <div className="add-item">
-            <form className="simple-form">
+          <div className="flex flex-col justify-center items-center bg-blue-kota text-white border-none rounded-xl shadow-[0px_4px_14px_3px_rgba(63,136,197,0.35)] p-4 sm:p-6 text-2xl sm:text-3xl">
+            <form className="w-full p-4">
 
-                <label>
-                  <p>Item Name</p>
-                  <input
-                    id="name"
-                    type="text"
-                    ref={nameRef}
-                    placeholder="Item name here"
-                    onChange={e => handleSetItem({
+                  <label className="block mb-4">
+                    <p className="text-sm mb-1">Item Name</p>
+                    <input
+                      className="block w-full p-2 sm:p-3 text-sm sm:text-base font-semibold text-white bg-blue-kota border-2 border-shadow-light transition-all focus:bg-white focus:text-black-grey focus:border-white focus:shadow-none rounded"
+                      id="name"
+                      type="text"
+                      ref={nameRef}
+                      placeholder="Item name here"
+                      onChange={e => handleSetItem({
                       key: e.target.id,
                       value: e.target.value})
                     }
@@ -124,14 +109,15 @@ function ItemModal(props) {
                     required
                   />
                 </label>
-                <label>
-                  <p>Amount In Stock</p>
+                <label className="block mb-4">
+                  <p className="text-sm mb-1">Amount In Stock</p>
                   <input
+                    className="block w-full p-2 sm:p-3 text-sm sm:text-base font-semibold text-white bg-blue-kota border-2 border-shadow-light transition-all focus:bg-white focus:text-black-grey focus:border-white focus:shadow-none rounded"
                     id="qty"
                     type="text"
                     inputMode="numeric"
                     pattern="^(\d{1,4})$"
-                    placeholder=""
+                    placeholder="0"
                     onChange={e => handleSetItem({
                       key: e.target.id,
                       value: e.target.validity.valid ? e.target.value : item.qty})
@@ -143,13 +129,15 @@ function ItemModal(props) {
                     value={item.qty}
                   />
                 </label>
-                <label>
-                  <p>Threshold</p>
+                <label className="block mb-4">
+                  <p className="text-sm mb-1">Threshold</p>
                   <input
+                    className="block w-full p-2 sm:p-3 text-sm sm:text-base font-semibold text-white bg-blue-kota border-2 border-shadow-light transition-all focus:bg-white focus:text-black-grey focus:border-white focus:shadow-none rounded"
                     id="threshold"
                     type="text"
                     inputMode="numeric"
                     pattern="^(\d{1,4})$"
+                    placeholder="0"
                     onChange={e => handleSetItem({
                       key: e.target.id,
                       value: e.target.validity.valid ? e.target.value : item.threshold})
@@ -161,30 +149,46 @@ function ItemModal(props) {
                     value={item.threshold}
                     />
                 </label>
-                <label>
-                  <p>Price</p>
+                <label className="block mb-4">
+                  <p className="text-sm mb-1">Price</p>
                   <input
+                    className="block w-full p-2 sm:p-3 text-sm sm:text-base font-semibold text-white bg-blue-kota border-2 border-shadow-light transition-all focus:bg-white focus:text-black-grey focus:border-white focus:shadow-none rounded"
                     id="price"
                     type="text"
-                    placeholder=""
-                    pattern="^([0-9]+(\.?[0-9]?[0-9]?)?)"
-                    onChange={e => handleSetItem({
-                      key: e.target.id,
-                      value: e.target.validity.valid ? e.target.value : item.price})
-                    }
-                    onBlur={e => handleSetItem({
-                      key: e.target.id,
-                      value: e.target.value === '' ? 0 : parseFloat(e.target.value)})
-                    }
-                    value={item.price}
+                    inputMode="decimal"
+                    placeholder="0.00"
+                    onChange={e => {
+                      const value = e.target.value;
+                      if (/^\d*\.?\d{0,2}$/.test(value) || value === '') {
+                        setDisplayPrice(value);
+                      }
+                    }}
+                    onBlur={e => {
+                      let value = e.target.value.trim();
+                      let parsedPrice = parseFloat(value);
+
+                      if (isNaN(parsedPrice) || value === '') {
+                        parsedPrice = 0;
+                      }
+
+                      // Ensure two decimal places for display
+                      const formattedDisplayPrice = parsedPrice.toFixed(2);
+                      setDisplayPrice(formattedDisplayPrice);
+
+                      setItem(prevItem => ({
+                        ...prevItem,
+                        price: parsedPrice
+                      }));
+                    }}
+                    value={displayPrice}
                   />
                 </label>
             </form>
-            <div className="item-buttons">
-              <button onClick={() => handleAcceptButton(item)}>
+            <div className="grid grid-cols-2 gap-4 mt-4 w-full p-4">
+              <button className="rounded-xl p-3 sm:p-4 flex justify-center items-center bg-transparent border border-white cursor-pointer hover:bg-white hover:text-blue-kota transition-colors duration-200 text-base sm:text-lg" onClick={() => handleAcceptButton(item)}>
                 <p>Accept</p>
               </button>
-              <button onClick={() => cancel()}>
+              <button className="rounded-xl p-3 sm:p-4 flex justify-center items-center bg-transparent border border-white cursor-pointer hover:bg-white hover:text-blue-kota transition-colors duration-200 text-base sm:text-lg" onClick={() => cancel()}>
                 <p>Cancel</p>
               </button>
             </div>
