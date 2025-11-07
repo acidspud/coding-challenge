@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ItemModal from "../components/itemModal";
-import { fetchItemList, deleteItem } from "../actions/item";
+import ItemModal from "@/components/itemModal";
+import { fetchItemList, deleteItem } from "@/actions/item";
 import { Fade } from "react-swift-reveal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -58,40 +58,40 @@ function Home() {
   const belowThreshold = (item) => item.threshold - item.qty;
 
   return (
-    <div className="screen home-container">
+    <div className="mt-16 min-h-screen max-w-5xl mx-auto px-4 py-8 md:px-8 lg:px-16">
       <ItemModal item={item} isOpen={isModalOpen} setIsOpen={setModalIsOpen} />
       <Fade top duration={500} delay={200}>
-        <div className="add-item-button">
-          <button onClick={() => handleEditItem(null)}>
+        <div className="mb-5">
+          <button className="flex items-center gap-2 text-xl bg-transparent border-none text-blue-kota cursor-pointer rounded-xl hover:text-shadow-light" onClick={() => handleEditItem(null)}>
             <FontAwesomeIcon icon={faAdd} />
-            <p>Add Item</p>
+            <p className="sm:block">Add Item</p>
           </button>
         </div>
       </Fade>
       <Fade bottom cascade duration={500} delay={200}>
-        <div className="item-list">
+        <div className="grid gap-5 mt-2">
           {itemList.sort(sortItems).map((item) => (
             <div
               key={item.id}
-              className={`item-item ${
-                belowThreshold(item) >= 0 ? "outofstock" : ""
+              className={`grid grid-cols-1 lg:grid-cols-5 gap-4 md:gap-5 items-center p-5 text-white border-none rounded-xl shadow-[0px_4px_14px_3px_rgba(63,136,197,0.35)] ${
+                belowThreshold(item) >= 0 ? "bg-orange" : "bg-blue-kota"
               }`}
             >
-              <p>{item.name.charAt(0).toUpperCase() + item.name.slice(1)}</p>
-              <p>
+              <p className="text-base font-semibold">{item.name.charAt(0).toUpperCase() + item.name.slice(1)}</p>
+              <p className="text-sm">
                 {belowThreshold(item) >= 0
                   ? `${belowThreshold(item)} Item/s Below Threshold of ${
                       item.threshold
                     }`
-                  : ""}
+                  : "In Stock"}
               </p>
-              <p>{item.qty} In Stock</p>
-              <p>R {(item.price / 100).toFixed(2)}</p>
-              <div className="item-item-buttons">
-                <button onClick={() => handleEditItem(item)}>
+              <p className="text-sm">{item.qty} In Stock</p>
+              <p className="text-sm">R {(item.price / 100).toFixed(2)}</p>
+              <div className="flex justify-end gap-2">
+                <button className="bg-transparent border-none text-white cursor-pointer" onClick={() => handleEditItem(item)}>
                   <FontAwesomeIcon size="2x" icon={faPenToSquare} />
                 </button>
-                <button onClick={() => dispatch(deleteItem(item.id))}>
+                <button className="bg-transparent border-none text-white cursor-pointer" onClick={() => dispatch(deleteItem(item.id))}>
                   <FontAwesomeIcon size="2x" icon={faTimes} />
                 </button>
               </div>
