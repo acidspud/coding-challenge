@@ -1,13 +1,13 @@
-import { LOGGED_IN_USER, LOGOUT } from "../actions/actionTypes";
+import { LOGGED_IN_USER, LOGOUT } from '../actions/actionTypes'
 
 export const sessionReducer = (state = {}, { type, payload }) => {
-  switch (type) {
+    switch (type) {
     case LOGGED_IN_USER:
-      return payload;
+        return payload
     case LOGOUT:
-      return state;
+        return state
     default: {
-      return state;
+        return state
     }
-  }
-};
+    }
+}

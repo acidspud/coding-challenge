@@ -26,7 +26,7 @@ export default [
       ...pluginReact.configs.recommended.rules,
       // Add any specific rules or overrides here
       'eol-last': ['error', 'always'],
-      'indent': ['error', 2],
+      'indent': ['error', 4],
       'linebreak-style': ['error', 'unix'],
       'no-trailing-spaces': 'error',
       'quotes': ['error', 'single'],
