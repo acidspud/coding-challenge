@@ -23,9 +23,11 @@ function Menu() {
 
       {/* Mobile menu button */}
       <div className="md:hidden">
-        <button onClick={() => setOpenMenu(!openMenu)} className="text-2xl focus:outline-none">
-          <FontAwesomeIcon icon={openMenu ? faTimes : faBars} />
-        </button>
+        {location.pathname !== "/login" && (
+          <button onClick={() => setOpenMenu(!openMenu)} className="text-2xl focus:outline-none">
+            <FontAwesomeIcon icon={openMenu ? faTimes : faBars} />
+          </button>
+        )}
       </div>
 
       {/* Desktop menu items */}
