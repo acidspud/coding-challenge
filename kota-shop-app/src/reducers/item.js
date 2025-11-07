@@ -1,13 +1,13 @@
-import { FETCH_ITEM_LIST } from "../actions/actionTypes";
+import { FETCH_ITEM_LIST } from '../actions/actionTypes'
 
 export function itemListReducer(state = [], action) {
 
-  switch (action.type) {
+    switch (action.type) {
     case FETCH_ITEM_LIST: {
-      return action.payload
+        return action.payload
     }
     default: {
-      return state;
+        return state
     }
-  }
+    }
 }
