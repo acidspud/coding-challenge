@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ItemModal from "@/components/itemModal";
 import { fetchItemList, deleteItem } from "@/actions/item";
-import { Fade } from "react-swift-reveal";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAdd,
@@ -22,6 +22,8 @@ function Home() {
 
   const [item, setItem] = useState(defaultItem);
   const [isModalOpen, setModalIsOpen] = useState(false);
+
+  const itemRefs = useRef(new Map());
 
   useEffect(() => {
     dispatch(fetchItemList());
@@ -57,48 +59,61 @@ function Home() {
 
   const belowThreshold = (item) => item.threshold - item.qty;
 
+  const getOrCreateRef = useCallback((id) => {
+    if (!itemRefs.current.has(id)) {
+      itemRefs.current.set(id, React.createRef());
+    }
+    return itemRefs.current.get(id);
+  }, []);
+
   return (
-    <div className="mt-16 min-h-screen max-w-5xl mx-auto px-4 py-8 md:px-8 lg:px-16">
+    <div className="mt-16 min-h-[calc(100vh-164px)] max-w-5xl mx-auto px-4 py-8 md:px-8 lg:px-16">
       <ItemModal item={item} isOpen={isModalOpen} setIsOpen={setModalIsOpen} />
-      <Fade top duration={500} delay={200}>
-        <div className="mb-5">
-          <button className="flex items-center gap-2 text-xl bg-transparent border-none text-blue-kota cursor-pointer rounded-xl hover:text-shadow-light" onClick={() => handleEditItem(null)}>
-            <FontAwesomeIcon icon={faAdd} />
-            <p className="sm:block">Add Item</p>
-          </button>
-        </div>
-      </Fade>
-      <Fade bottom cascade duration={500} delay={200}>
-        <div className="grid gap-5 mt-2">
-          {itemList.sort(sortItems).map((item) => (
-            <div
+      <div className="mb-5">
+        <button className="flex items-center gap-2 text-xl bg-transparent border-none text-blue-kota cursor-pointer rounded-xl hover:text-shadow-light" onClick={() => handleEditItem(null)}>
+          <FontAwesomeIcon icon={faAdd} />
+          <p className="sm:block">Add Item</p>
+        </button>
+      </div>
+      <TransitionGroup className="grid gap-5 mt-2">
+        {itemList.sort(sortItems).map((item) => {
+          const nodeRef = getOrCreateRef(item.id);
+          return (
+            <CSSTransition
               key={item.id}
-              className={`grid grid-cols-1 lg:grid-cols-5 gap-4 md:gap-5 items-center p-5 text-white border-none rounded-xl shadow-[0px_4px_14px_3px_rgba(63,136,197,0.35)] ${
-                belowThreshold(item) >= 0 ? "bg-orange" : "bg-blue-kota"
-              }`}
+              timeout={500}
+              classNames="item-transition"
+              nodeRef={nodeRef}
             >
-              <p className="text-base font-semibold">{item.name.charAt(0).toUpperCase() + item.name.slice(1)}</p>
-              <p className="text-sm">
-                {belowThreshold(item) >= 0
-                  ? `${belowThreshold(item)} Item/s Below Threshold of ${
-                      item.threshold
-                    }`
-                  : "In Stock"}
-              </p>
-              <p className="text-sm">{item.qty} In Stock</p>
-              <p className="text-sm">R {(item.price / 100).toFixed(2)}</p>
-              <div className="flex justify-end gap-2">
-                <button className="bg-transparent border-none text-white cursor-pointer" onClick={() => handleEditItem(item)}>
-                  <FontAwesomeIcon size="2x" icon={faPenToSquare} />
-                </button>
-                <button className="bg-transparent border-none text-white cursor-pointer" onClick={() => dispatch(deleteItem(item.id))}>
-                  <FontAwesomeIcon size="2x" icon={faTimes} />
-                </button>
+              <div
+                ref={nodeRef}
+                className={`grid grid-cols-1 lg:grid-cols-5 gap-4 md:gap-5 items-center p-5 text-white border-none rounded-xl shadow-[0px_4px_14px_3px_rgba(63,136,197,0.35)] ${
+                  belowThreshold(item) >= 0 ? "bg-orange" : "bg-blue-kota"
+                }`}
+              >
+                <p className="text-base font-semibold">{item.name.charAt(0).toUpperCase() + item.name.slice(1)}</p>
+                <p className="text-sm">
+                  {belowThreshold(item) >= 0
+                    ? `${belowThreshold(item)} Item/s Below Threshold of ${
+                        item.threshold
+                      }`
+                    : "In Stock"}
+                </p>
+                <p className="text-sm">{item.qty} In Stock</p>
+                <p className="text-sm">R {(item.price / 100).toFixed(2)}</p>
+                <div className="flex justify-end gap-2">
+                  <button className="bg-transparent border-none text-white cursor-pointer" onClick={() => handleEditItem(item)}>
+                    <FontAwesomeIcon size="2x" icon={faPenToSquare} />
+                  </button>
+                  <button className="bg-transparent border-none text-white cursor-pointer" onClick={() => dispatch(deleteItem(item.id))}>
+                    <FontAwesomeIcon size="2x" icon={faTimes} />
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-      </Fade>
+            </CSSTransition>
+          );
+        })}
+      </TransitionGroup>
     </div>
   );
 }
