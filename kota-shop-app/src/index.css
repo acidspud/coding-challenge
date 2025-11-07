@@ -1,17 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  --color-white: #fff;
-  --color-yellow: #1D5B79;
-  --color-blue: #22A699;
-  --color-orange: #F24C3D;
-  --color-green: #41d9b6;
-  --color-green-light-1: #8de8d3;
-  --color-green-light-2: #a0ecda;
-  --color-green-light-3: #b3efe1;
-  --color-shadow-light: #dfdfdf;
-  --color-black-grey: #4e4e4e;
-  --color-blue-kota: #22A699;
+    --color-white: #fff;
+    --color-yellow: #1D5B79;
+    --color-blue: #22A699;
+    --color-orange: #F24C3D;
+    --color-green: #41d9b6;
+    --color-green-light-1: #8de8d3;
+    --color-green-light-2: #a0ecda;
+    --color-green-light-3: #b3efe1;
+    --color-shadow-light: #dfdfdf;
+    --color-black-grey: #4e4e4e;
 }
 
 @layer base {
@@ -29,8 +28,53 @@
 
 @layer utilities {
   code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
   }
 }
 
+.item-transition-enter {
+  @apply opacity-0 translate-y-12;
+}
+
+.item-transition-enter-active {
+  @apply opacity-100 translate-y-0 transition-all duration-500 ease-in-out;
+}
+
+.item-transition-exit {
+  @apply opacity-100 translate-y-0;
+}
+
+.item-transition-exit-active {
+  @apply opacity-0 translate-y-12 transition-all duration-500 ease-in-out;
+}
+
+.modal-overlay-after-open {
+  @apply opacity-100;
+}
+
+.modal-overlay-before-close {
+  @apply opacity-0;
+}
+
+.modal-content-after-open {
+  @apply opacity-100 scale-100;
+}
+
+.modal-content-before-close {
+  @apply opacity-0 scale-95;
+}
+
+@keyframes fade-right {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fade-right {
+  animation: fade-right 2s ease-in-out forwards;
+}
