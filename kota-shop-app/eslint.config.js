@@ -25,7 +25,13 @@ export default [
       ...eslintJs.configs.recommended.rules,
       ...pluginReact.configs.recommended.rules,
       // Add any specific rules or overrides here
+      'eol-last': ['error', 'always'],
+      'indent': ['error', 2],
+      'linebreak-style': ['error', 'unix'],
+      'no-trailing-spaces': 'error',
+      'quotes': ['error', 'single'],
       'react/react-in-jsx-scope': 'off', // Not needed for React 17+ with new JSX transform
+      'semi': ['error', 'never'],
     },
     settings: {
       react: {
