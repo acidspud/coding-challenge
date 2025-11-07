@@ -1,20 +1,20 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import ItemModal from "@/components/itemModal";
-import { fetchItemList, deleteItem } from "@/actions/item";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useEffect, useState, useRef, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import ItemModal from '@/components/itemModal';
+import { fetchItemList, deleteItem } from '@/actions/item';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faAdd,
   faPenToSquare,
   faTimes,
-} from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons';
 
 function Home() {
   const itemList = useSelector((state) => state.itemList);
   const dispatch = useDispatch();
   const defaultItem = {
-    name: "",
+    name: '',
     qty: 1,
     threshold: 0,
     price: 0,
@@ -70,7 +70,7 @@ function Home() {
     <div className="mt-16 min-h-[calc(100vh-164px)] max-w-5xl mx-auto px-4 py-8 md:px-8 lg:px-16">
       <ItemModal item={item} isOpen={isModalOpen} setIsOpen={setModalIsOpen} />
       <div className="mb-5">
-        <button className="flex items-center gap-2 text-xl bg-transparent border-none text-blue-kota cursor-pointer rounded-xl hover:text-shadow-light" onClick={() => handleEditItem(null)}>
+        <button className="flex items-center gap-2 text-xl bg-transparent border-none text-blue cursor-pointer rounded-xl hover:text-blue/70" onClick={() => handleEditItem(null)}>
           <FontAwesomeIcon icon={faAdd} />
           <p className="sm:block">Add Item</p>
         </button>
@@ -88,7 +88,7 @@ function Home() {
               <div
                 ref={nodeRef}
                 className={`grid grid-cols-1 lg:grid-cols-5 gap-4 md:gap-5 items-center p-5 text-white border-none rounded-xl shadow-[0px_4px_14px_3px_rgba(63,136,197,0.35)] ${
-                  belowThreshold(item) >= 0 ? "bg-orange" : "bg-blue-kota"
+                  belowThreshold(item) >= 0 ? 'bg-orange' : 'bg-blue'
                 }`}
               >
                 <p className="text-base font-semibold">{item.name.charAt(0).toUpperCase() + item.name.slice(1)}</p>
@@ -97,7 +97,7 @@ function Home() {
                     ? `${belowThreshold(item)} Item/s Below Threshold of ${
                         item.threshold
                       }`
-                    : "In Stock"}
+                    : 'In Stock'}
                 </p>
                 <p className="text-sm">{item.qty} In Stock</p>
                 <p className="text-sm">R {(item.price / 100).toFixed(2)}</p>
