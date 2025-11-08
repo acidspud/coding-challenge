@@ -19,7 +19,7 @@ export const fetchItemList = () => {
 
 export const addItem = item => {
     // Convert price to cent
-    item.price = item.price * 100
+    item.price = Math.trunc(item.price * 100)
     return dispatch => {
         axiosInstance.post('/items', item).then(() => {
             dispatch(fetchItemList())
@@ -29,7 +29,7 @@ export const addItem = item => {
 
 export const updateItem = item => {
     // Convert price to cent
-    item.price = item.price * 100
+    item.price = Math.trunc(item.price * 100)
     return dispatch => {
         axiosInstance.put(`/items/${item.id}`, item).then(() => {
             dispatch(fetchItemList())
