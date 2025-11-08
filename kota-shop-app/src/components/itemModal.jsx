@@ -56,7 +56,7 @@ function ItemModal(props) {
             } else {
                 dispatch(addItem(item))
             }
-            cancel()
+            handleCancelButton()
             return
         }
 
@@ -68,7 +68,7 @@ function ItemModal(props) {
         nameRef.current.focus()
     }
 
-    const cancel = () => {
+    const handleCancelButton = () => {
         setIsOpen(false)
     }
 
@@ -211,7 +211,7 @@ function ItemModal(props) {
                     </button>
                     <button
                         className="rounded-xl p-3 sm:p-4 flex justify-center items-center bg-transparent border border-white cursor-pointer hover:bg-white hover:text-blue transition-colors duration-200 text-base sm:text-lg"
-                        onClick={() => cancel()}
+                        onClick={() => handleCancelButton()}
                     >
                         <p>Cancel</p>
                     </button>
