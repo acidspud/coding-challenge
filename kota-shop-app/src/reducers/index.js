@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
-import { sessionReducer } from './session'
-import { itemListReducer } from './item'
+import { sessionReducer } from '@/reducers/session'
+import { itemListReducer } from '@/reducers/item'
 
 const rootReducer = combineReducers({
     session: sessionReducer,

@@ -1,5 +1,5 @@
-import { axiosInstance } from '../helpers/configured_axios'
-import { FETCH_ITEM_LIST } from './actionTypes'
+import { axiosInstance } from '@/helpers/configured_axios'
+import { FETCH_ITEM_LIST } from '@/actions/actionTypes'
 
 export const fetchItemList = () => {
 

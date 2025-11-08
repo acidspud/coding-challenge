@@ -1,4 +1,4 @@
-import { FETCH_ITEM_LIST } from '../actions/actionTypes'
+import { FETCH_ITEM_LIST } from '@/actions/actionTypes'
 
 export function itemListReducer(state = [], action) {
 
