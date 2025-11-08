@@ -12,7 +12,7 @@ function ItemModal(props) {
         price: 0,
     }
 
-    const setIsOpen = props.setIsOpen
+    const { setIsOpen } = props
 
     const [item, setItem] = useState(defaultItem)
     const [displayPrice, setDisplayPrice] = useState('0.00')
