@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import cookie from 'react-cookies'
-import Loading from './components/loading'
-import store from './helpers/store'
-import Menu from './components/menu'
-import Footer from './components/footer'
-const Home = lazy(() => import('./screens/home'))
-const Login = lazy(() => import('./screens/login'))
+import Loading from '@/components/loading'
+import store from '@/helpers/store'
+import Menu from '@/components/menu'
+import Footer from '@/components/footer'
+const Home = lazy(() => import('@/screens/home'))
+const Login = lazy(() => import('@/screens/login'))
 
 const PrivateRouteProps = {
     children: PropTypes.node.isRequired,

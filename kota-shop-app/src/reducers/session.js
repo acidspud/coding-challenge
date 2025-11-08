@@ -1,4 +1,4 @@
-import { LOGGED_IN_USER, LOGOUT } from '../actions/actionTypes'
+import { LOGGED_IN_USER, LOGOUT } from '@/actions/actionTypes'
 
 export const sessionReducer = (state = {}, { type, payload }) => {
     switch (type) {

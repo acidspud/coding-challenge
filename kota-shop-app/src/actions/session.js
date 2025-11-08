@@ -1,5 +1,5 @@
-import { axiosInstance } from '../helpers/configured_axios'
-import { LOGGED_IN_USER, LOGOUT } from './actionTypes'
+import { axiosInstance } from '@/helpers/configured_axios'
+import { LOGGED_IN_USER, LOGOUT } from '@/actions/actionTypes'
 import cookie from 'react-cookies'
 
 export const setJWT = token => {
