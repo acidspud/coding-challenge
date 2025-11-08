@@ -91,12 +91,15 @@ function ItemModal(props) {
                 beforeClose: 'modal-content-before-close',
             }}
         >
-            <div className="flex flex-col justify-center items-center bg-blue text-white border-none rounded-xl shadow-[0px_4px_14px_3px_rgba(63,136,197,0.35)] p-4 sm:p-6 text-2xl sm:text-3xl">
+            <div className="flex flex-col justify-center items-center bg-surface text-text-primary border-none rounded-lg shadow-lg p-4 sm:p-6">
+                <h2 className="text-2xl sm:text-3xl font-bold mb-6">
+                    {item.id ? 'Edit Item' : 'Add New Item'}
+                </h2>
                 <form className="w-full p-4">
                     <label className="block mb-4">
-                        <p className="text-sm mb-1">Item Name</p>
+                        <p className="text-sm mb-1 text-secondary">Item Name</p>
                         <input
-                            className="block w-full p-2 sm:p-3 text-sm sm:text-base font-semibold text-white bg-blue border-2 border-shadow-light transition-all focus:bg-white focus:text-black-grey focus:border-white focus:shadow-none rounded"
+                            className="block w-full p-2 sm:p-3 text-sm sm:text-base font-semibold text-text-primary bg-white border border-border transition-all focus:border-primary-light focus:ring-2 focus:ring-primary-light rounded"
                             id="name"
                             type="text"
                             ref={nameRef}
@@ -118,9 +121,9 @@ function ItemModal(props) {
                         />
                     </label>
                     <label className="block mb-4">
-                        <p className="text-sm mb-1">Amount In Stock</p>
+                        <p className="text-sm mb-1 text-secondary">Amount In Stock</p>
                         <input
-                            className="block w-full p-2 sm:p-3 text-sm sm:text-base font-semibold text-white bg-blue border-2 border-shadow-light transition-all focus:bg-white focus:text-black-grey focus:border-white focus:shadow-none rounded"
+                            className="block w-full p-2 sm:p-3 text-sm sm:text-base font-semibold text-text-primary bg-white border border-border transition-all focus:border-primary-light focus:ring-2 focus:ring-primary-light rounded"
                             id="qty"
                             type="text"
                             inputMode="numeric"
@@ -142,9 +145,9 @@ function ItemModal(props) {
                         />
                     </label>
                     <label className="block mb-4">
-                        <p className="text-sm mb-1">Threshold</p>
+                        <p className="text-sm mb-1 text-secondary">Threshold</p>
                         <input
-                            className="block w-full p-2 sm:p-3 text-sm sm:text-base font-semibold text-white bg-blue border-2 border-shadow-light transition-all focus:bg-white focus:text-black-grey focus:border-white focus:shadow-none rounded"
+                            className="block w-full p-2 sm:p-3 text-sm sm:text-base font-semibold text-text-primary bg-white border border-border transition-all focus:border-primary-light focus:ring-2 focus:ring-primary-light rounded"
                             id="threshold"
                             type="text"
                             inputMode="numeric"
@@ -168,9 +171,9 @@ function ItemModal(props) {
                         />
                     </label>
                     <label className="block mb-4">
-                        <p className="text-sm mb-1">Price</p>
+                        <p className="text-sm mb-1 text-secondary">Price</p>
                         <input
-                            className="block w-full p-2 sm:p-3 text-sm sm:text-base font-semibold text-white bg-blue border-2 border-shadow-light transition-all focus:bg-white focus:text-black-grey focus:border-white focus:shadow-none rounded"
+                            className="block w-full p-2 sm:p-3 text-sm sm:text-base font-semibold text-text-primary bg-white border border-border transition-all focus:border-primary-light focus:ring-2 focus:ring-primary-light rounded"
                             id="price"
                             type="text"
                             inputMode="decimal"
@@ -204,16 +207,16 @@ function ItemModal(props) {
                 </form>
                 <div className="grid grid-cols-2 gap-4 mt-4 w-full p-4">
                     <button
-                        className="rounded-xl p-3 sm:p-4 flex justify-center items-center bg-transparent border border-white cursor-pointer hover:bg-white hover:text-blue transition-colors duration-200 text-base sm:text-lg"
+                        className="rounded-md p-3 sm:p-4 flex justify-center items-center bg-primary text-white cursor-pointer hover:bg-primary-light transition-colors duration-200 text-base sm:text-lg shadow-md"
                         onClick={() => handleAcceptButton(item)}
                     >
-                        <p>Accept</p>
+                        <span>Accept</span>
                     </button>
                     <button
-                        className="rounded-xl p-3 sm:p-4 flex justify-center items-center bg-transparent border border-white cursor-pointer hover:bg-white hover:text-blue transition-colors duration-200 text-base sm:text-lg"
+                        className="rounded-md p-3 sm:p-4 flex justify-center items-center bg-secondary text-white cursor-pointer hover:bg-text-secondary transition-colors duration-200 text-base sm:text-lg shadow-md"
                         onClick={() => handleCancelButton()}
                     >
-                        <p>Cancel</p>
+                        <span>Cancel</span>
                     </button>
                 </div>
             </div>

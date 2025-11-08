@@ -14,8 +14,8 @@ function Menu() {
     }
 
     return (
-        <nav className="bg-blue text-white p-4 flex justify-between items-center fixed top-0 left-0 right-0 z-50 h-[70px]">
-            <Link to="/" className="text-2xl font-bold no-underline text-white" onClick={() => setOpenMenu(false)}>
+        <nav className="bg-primary text-white p-4 flex justify-between items-center fixed top-0 left-0 right-0 z-50 h-[70px] shadow-md">
+            <Link to="/" className="text-2xl font-bold no-underline text-white tracking-wide" onClick={() => setOpenMenu(false)}>
         KoTa Shop
             </Link>
 
@@ -31,7 +31,7 @@ function Menu() {
             {/* Desktop menu items */}
             <div className="hidden md:flex items-center space-x-4">
                 {location.pathname !== '/login' && (
-                    <Link to="/login" onClick={handleLogout} className="text-lg no-underline text-white">
+                    <Link to="/login" onClick={handleLogout} className="text-lg no-underline text-white hover:text-primary-light transition-colors duration-200">
             Logout
                     </Link>
                 )}
@@ -39,9 +39,9 @@ function Menu() {
 
             {/* Mobile menu (hidden by default, shown when openMenu is true) */}
             {openMenu && (
-                <div className="md:hidden absolute top-[70px] left-0 w-full bg-blue p-4 shadow-lg">
+                <div className="md:hidden absolute top-[70px] left-0 w-full bg-primary p-4 shadow-lg">
                     {location.pathname !== '/login' && (
-                        <Link to="/login" onClick={handleLogout} className="block text-lg py-2 no-underline text-white">
+                        <Link to="/login" onClick={handleLogout} className="block text-lg py-2 no-underline text-white hover:text-primary-light transition-colors duration-200">
               Logout
                         </Link>
                     )}
