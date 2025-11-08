@@ -1,26 +1,33 @@
 @import "tailwindcss";
 
 @theme {
-    --color-white: #fff;
-    --color-yellow: #1D5B79;
-    --color-blue: #22A699;
-    --color-orange: #F24C3D;
-    --color-green: #41d9b6;
-    --color-green-light-1: #8de8d3;
-    --color-green-light-2: #a0ecda;
-    --color-green-light-3: #b3efe1;
-    --color-shadow-light: #dfdfdf;
-    --color-black-grey: #4e4e4e;
+    /* Primary & Accent Colors */
+    --color-primary: #4A90E2; /* Modern Blue - Main brand color */
+    --color-secondary: #6C757D; /* Muted Grey - Secondary actions, subtle elements */
+    --color-primary-light: #8BBCEF; /* Lighter Blue - Hover/Active, lighter elements */
+    --color-accent: #FFC107; /* Amber - Subtle contrast, call to action, warnings */
+
+    /* Neutral Colors */
+    --color-background: #F8F9FA; /* Light Grey - Main page background */
+    --color-surface: #ffffff; /* Pure White - Card backgrounds, modals */
+    --color-text-primary: #212529; /* Dark Grey - Main body text */
+    --color-text-secondary: #6C757D; /* Muted Grey - Subtle text, placeholders (same as secondary) */
+    --color-border: #DEE2E6; /* Light Grey - Separators, outlines */
+    --color-shadow: rgba(0, 0, 0, 0.1); /* Soft Shadow - Adds depth */
+
+    /* Status Colors */
+    --color-success: #28a745; /* A standard, professional green */
+    --color-warning: #ffc107; /* A standard, professional orange/yellow */
+    --color-error: #DC3545; /* Red - Error messages, critical alerts */
 }
 
 @layer base {
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif;
+    font-family: 'Inter', sans-serif; /* Modern sans-serif font */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: var(--color-background); /* Updated to new variable */
   }
 }
 
@@ -28,7 +35,7 @@
 
 @layer utilities {
   code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+    font-family: 'Fira Code', monospace; /* Modern monospace font */
   }
 }
 
@@ -78,3 +85,4 @@
 .animate-fade-right {
   animation: fade-right 2s ease-in-out forwards;
 }
+

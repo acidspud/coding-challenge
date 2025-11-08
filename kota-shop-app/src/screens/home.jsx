@@ -70,15 +70,15 @@ function Home() {
     }, [])
 
     return (
-        <div className="mt-16 min-h-[calc(100vh-164px)] max-w-5xl mx-auto px-4 py-8 md:px-8 lg:px-16">
+        <div className="mt-[70px] min-h-[calc(100vh-140px)] max-w-5xl mx-auto px-4 py-8 md:px-8 lg:px-16">
             <ItemModal item={item} isOpen={isModalOpen} setIsOpen={setModalIsOpen} />
-            <div className="mb-5">
+            <div className="mb-6 flex justify-end">
                 <button
-                    className="flex items-center gap-2 text-xl bg-transparent border-none text-blue cursor-pointer rounded-xl hover:text-blue/70"
+                    className="flex items-center gap-2 text-lg bg-primary text-white px-5 py-2 rounded-full shadow-md hover:bg-primary-light transition-colors duration-200"
                     onClick={() => handleEditItem(null)}
                 >
                     <FontAwesomeIcon icon={faAdd} />
-                    <p className="sm:block">Add Item</p>
+                    <span>Add New Item</span>
                 </button>
             </div>
             <TransitionGroup className="grid gap-5 mt-2">
