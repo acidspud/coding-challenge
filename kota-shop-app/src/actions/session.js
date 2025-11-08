@@ -1,12 +1,9 @@
 import { axiosInstance } from '@/helpers/configured_axios'
 import { LOGGED_IN_USER, LOGOUT } from '@/actions/actionTypes'
-import cookie from 'react-cookies'
+import cookie from '@/helpers/cookie'
 
 export const setJWT = token => {
-    // 3 months in milliseconds
-    const ms = 1000 * 60 * 60 * 24 * 90
-    const expires = new Date(Date.now() + ms)
-    cookie.save('jwt', token, { expires })
+    cookie.save('jwt', token)
 }
 
 export const login = user => {

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import cookie from 'react-cookies'
+import cookie from '@/helpers/cookie'
 
 export const baseURL = 'http://localhost:8080/api/v1/'
 

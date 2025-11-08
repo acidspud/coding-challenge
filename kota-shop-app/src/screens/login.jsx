@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import cookie from 'react-cookies'
+import cookie from '@/helpers/cookie'
 import { login, signup } from '@/actions/session'
 import { useNavigate } from 'react-router-dom'
 
