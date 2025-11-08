@@ -4,7 +4,7 @@ import eslintJs from '@eslint/js';
 
 export default [
   {
-    files: ['src/**/*.{js,jsx}'],
+    files: ['src/**/*.{js,jsx}', 'src/**/*.test.js', 'src/**/*.test.jsx'],
     languageOptions: {
       parserOptions: {
         ecmaFeatures: {
@@ -16,6 +16,13 @@ export default [
       globals: {
         ...globals.browser,
         ...globals.node,
+        // Vitest globals
+        vi: 'readonly',
+        describe: 'readonly',
+        it: 'readonly',
+        expect: 'readonly',
+        beforeEach: 'readonly',
+        afterEach: 'readonly',
       },
     },
     plugins: {

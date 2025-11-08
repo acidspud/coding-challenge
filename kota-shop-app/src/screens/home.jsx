@@ -8,6 +8,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAdd } from '@fortawesome/free-solid-svg-icons'
 import { deleteItem } from '@/actions/item'
 
+export const sortItems = (a, b) => {
+    const lowStockA = a.threshold - a.qty
+    const lowStockB = b.threshold - b.qty
+
+    // Primary sort: by low stock (ascending)
+    if (lowStockA !== lowStockB) {
+        return lowStockA - lowStockB
+    }
+
+    // Secondary sort: by name alphabetically (ascending) if low stock is equal
+    const nameA = a.name.toLowerCase()
+    const nameB = b.name.toLowerCase()
+
+    if (nameA < nameB) return -1
+    if (nameA > nameB) return 1
+
+    return 0
+}
+
 function Home() {
     const itemList = useSelector((state) => state.itemList)
     const dispatch = useDispatch()
@@ -41,25 +60,6 @@ function Home() {
         if (id) {
             dispatch(deleteItem(id))
         }
-    }
-
-    const sortItems = (a, b) => {
-        const lowStockA = a.threshold - a.qty
-        const lowStockB = b.threshold - b.qty
-
-        // Primary sort: by low stock (ascending)
-        if (lowStockA !== lowStockB) {
-            return lowStockA - lowStockB
-        }
-
-        // Secondary sort: by name alphabetically (ascending) if low stock is equal
-        const nameA = a.name.toLowerCase()
-        const nameB = b.name.toLowerCase()
-
-        if (nameA < nameB) return -1
-        if (nameA > nameB) return 1
-
-        return 0
     }
 
     const getOrCreateRef = useCallback((id) => {
