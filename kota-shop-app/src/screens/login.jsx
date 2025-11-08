@@ -31,7 +31,7 @@ function Login() {
     }
 
     return (
-        <div className="flex justify-center items-center min-h-[calc(100vh-70px)] bg-background p-4">
+        <div className="flex justify-center items-center mt-[70px] min-h-[calc(100vh-140px)] bg-background p-4">
             <div className="flex flex-col items-center p-8 rounded-lg bg-surface shadow-lg w-full max-w-md gap-4">
                 <input
                     id="email"
