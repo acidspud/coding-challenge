@@ -27,9 +27,21 @@ export const sortItems = (a, b) => {
     return 0
 }
 
+export const search = (itemList, searchterm) => {
+    if (!searchterm || searchterm.length === 0)
+        return itemList
+
+    return itemList.filter((item) => {
+        return item.name.includes(searchterm)
+    })
+}
+
+
 function Home() {
     const itemList = useSelector((state) => state.itemList)
     const dispatch = useDispatch()
+
+    const [searchTerm, setSearchTerm] = useState('')
 
     const defaultItem = {
         name: '',
@@ -42,6 +54,8 @@ function Home() {
     const [isModalOpen, setModalIsOpen] = useState(false)
 
     const itemRefs = useRef(new Map())
+
+    const sortedFilteredItems = search(itemList,searchTerm).sort(sortItems)
 
     useEffect(() => {
         dispatch(fetchItemList())
@@ -72,7 +86,11 @@ function Home() {
     return (
         <div className="mt-[70px] min-h-[calc(100vh-140px)] max-w-5xl mx-auto px-4 py-8 md:px-8 lg:px-16">
             <ItemModal item={item} isOpen={isModalOpen} setIsOpen={setModalIsOpen} />
-            <div className="mb-6 flex justify-end">
+            <div className="mb-6 flex justify-end gap-4">
+                <input
+                    className="block grow px-3 py-1.5 text-sm text-gray-700 border border-gray-300 rounded bg-white placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400"
+                    type="search"
+                    onChange={(e) => setSearchTerm(e.target.value)} />
                 <button
                     className="flex items-center gap-2 text-lg bg-primary text-white px-5 py-2 rounded-full shadow-md hover:bg-primary-light transition-colors duration-200"
                     onClick={() => handleEditItem(null)}
@@ -82,7 +100,7 @@ function Home() {
                 </button>
             </div>
             <TransitionGroup className="grid gap-5 mt-2">
-                {itemList.sort(sortItems).map((item) => {
+                {sortedFilteredItems.sort(sortItems).map((item) => {
                     const nodeRef = getOrCreateRef(item.id)
                     return (
                         <CSSTransition
